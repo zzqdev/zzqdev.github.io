@@ -1,33 +1,21 @@
 {
-  "name": "zzq",
+  "name": "zzqdev.github.io",
   "type": "module",
-  "version": "1.0.0",
-  "description": "皆有定数、加油",
-  "packageManager": "pnpm@10.4.1",
-  "author": "zhangzhiqiang <zzqcoder@163.com>",
-  "license": "MIT",
-  "scripts": {
-    "docs:build": "vuepress build docs --clean-cache --clean-temp",
-    "docs:dev": "vuepress dev docs",
-    "docs:dev-clean": "vuepress dev docs --clean-cache --clean-temp",
-    "docs:preview": "http-server docs/.vuepress/dist",
-    "vp-update": "pnpm dlx vp-update"
-  },
-  "devDependencies": {
-    "@vuepress/bundler-vite": "2.0.0-rc.26",
-    "http-server": "^14.1.1",
-    "typescript": "^5.9.3",
-    "vue": "^3.5.26",
-    "vuepress": "2.0.0-rc.26",
-    "vuepress-theme-plume": "1.0.0-rc.194"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@parcel/watcher",
-      "esbuild"
-    ]
-  },
+  "version": "0.0.1",
   "engines": {
-    "node": "^20.19.0 || >=22.0.0"
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^8.1.6",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.6",
+    "astro": "^7.4.13",
+    "sharp": "^0.35.0"
   }
 }
