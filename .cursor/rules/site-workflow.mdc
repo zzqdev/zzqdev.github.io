@@ -1,0 +1,47 @@
+---
+description: zzq 个人站内容与改站约定（笔记/作品/主题/部署）
+alwaysApply: true
+---
+
+# zzqdev.github.io
+
+Astro Starlight 站点，中文，视觉偏 Fumadocs（米白 + 暖橙强调）。回答用简体中文。
+
+## 常用路径
+
+- 首页：`src/content/docs/index.mdx`（`template: splash`）
+- 笔记：`src/content/docs/notes/*.md(x)`
+- 作品：`src/content/docs/projects/*.md(x)`
+- 侧边栏 / 站点信息：`astro.config.mjs`
+- 主题色：`src/styles/global.css`
+
+## 新增笔记
+
+1. 新建 `src/content/docs/notes/<slug>.md`，至少包含：
+
+```md
+---
+title: 标题
+description: 一句话摘要
+---
+```
+
+2. 在 `astro.config.mjs` 的 `sidebar`「技术笔记」里加一项：`{ label: '标题', slug: 'notes/<slug>' }`
+3. 本地用 `pnpm dev` 预览；slug 不要写成 `notes/foo/index`，文件 `notes/foo.md` 对应 slug `notes/foo`
+
+## 新增作品
+
+1. 列表页是 `src/content/docs/projects/index.md`（sidebar slug 为 `projects`）
+2. 单项目新建 `src/content/docs/projects/<slug>.md`，并在 sidebar「作品」挂上 `projects/<slug>`
+3. 在列表页表格补一行链接
+
+## 改主题
+
+- 强调色 / 灰色阶：改 `src/styles/global.css` 里 `@theme` 的 `--color-accent-*`、`--color-gray-*`
+- 浅色背景：改 `[data-theme='light']` 下的 `--sl-color-bg*`
+
+## 命令与部署
+
+- 开发：`pnpm dev`；构建：`pnpm build`
+- 推送 `main` 触发 GitHub Pages（`.github/workflows/deploy.yml`）
+- 未经用户明确要求不要 commit / push
