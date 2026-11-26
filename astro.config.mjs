@@ -1,35 +1,42 @@
 // @ts-check
-
-import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
-import { defineConfig, fontProviders } from 'astro/config';
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://zzqdev.github.io',
-	integrations: [mdx(), sitemap()],
-	fonts: [
-		{
-			provider: fontProviders.local(),
-			name: 'Atkinson',
-			cssVariable: '--font-atkinson',
-			fallbacks: ['sans-serif'],
-			options: {
-				variants: [
-					{
-						src: ['./src/assets/fonts/atkinson-regular.woff'],
-						weight: 400,
-						style: 'normal',
-						display: 'swap',
-					},
-					{
-						src: ['./src/assets/fonts/atkinson-bold.woff'],
-						weight: 700,
-						style: 'normal',
-						display: 'swap',
-					},
-				],
+	integrations: [
+		starlight({
+			title: 'zzq',
+			description: '皆有定数、加油',
+			locales: {
+				root: {
+					label: '简体中文',
+					lang: 'zh-CN',
+				},
 			},
-		},
+			social: [
+				{
+					icon: 'github',
+					label: 'GitHub',
+					href: 'https://github.com/zzqdev/zzqdev.github.io',
+				},
+			],
+			sidebar: [
+				{
+					label: '技术笔记',
+					items: [{ label: '示例笔记', slug: 'notes/example' }],
+				},
+				{
+					label: '作品',
+					items: [{ label: '项目一览', slug: 'projects' }],
+				},
+			],
+			customCss: ['./src/styles/global.css'],
+		}),
 	],
+	vite: {
+		plugins: [tailwindcss()],
+	},
 });

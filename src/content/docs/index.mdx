@@ -1,0 +1,44 @@
+---
+title: zzq
+description: 技术笔记与作品整理
+template: splash
+hero:
+  title: |
+    写清楚一点，
+    <span
+      class="font-black text-transparent
+        bg-clip-text bg-gradient-to-b
+        from-accent-700 to-accent-500
+        dark:from-accent-400 dark:to-accent-200"
+    >
+      再分享出去
+    </span>
+  tagline: 皆有定数、加油。这里放技术笔记和作品。
+  actions:
+    - text: 开始阅读
+      link: /notes/example/
+      icon: right-arrow
+    - text: 查看作品
+      link: /projects/
+      icon: right-arrow
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## 按主题浏览
+
+<CardGrid>
+	<Card title="技术笔记" icon="pencil">
+		记录开发过程中的问题、方案和踩坑。从 [示例笔记](/notes/example/) 开始。
+	</Card>
+	<Card title="作品" icon="rocket">
+		放项目说明、演示链接和简单回顾。去看 [项目一览](/projects/)。
+	</Card>
+	<Card title="搜索" icon="magnifier">
+		按 `⌘K` / `Ctrl+K` 打开搜索，快速跳到某一页。
+	</Card>
+	<Card title="自定义" icon="setting">
+		主题色和布局在 `src/styles/global.css`，侧边栏在 `astro.config.mjs`。
+	</Card>
+</CardGrid>
