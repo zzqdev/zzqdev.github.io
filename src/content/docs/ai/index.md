@@ -5,6 +5,12 @@ description: 用 AI 辅助编程的实践笔记入口
 
 记录和 AI 一起写代码时的流程、提示词与踩坑。
 
+## 子栏目
+
+- [老项目理解](/ai/legacy-project/)：全局 → 局部 → 关系 → 改动
+- [Claude Code](/ai/claude-code/)：终端 Agent 实践笔记
+- [Cursor 使用备忘](/ai/cursor-tips/)
+
 ## 可以记什么
 
 - 常用工作流（规划 → 实现 → 审查）

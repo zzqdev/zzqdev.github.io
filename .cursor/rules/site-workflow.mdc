@@ -11,7 +11,7 @@ Astro Starlight 站点，中文，视觉偏 Fumadocs（米白 + 暖橙强调）�
 
 - 首页：`src/content/docs/index.mdx`（`template: splash`）
 - 笔记：`src/content/docs/notes/*.md(x)`
-- AI 编程：`src/content/docs/ai/*.md(x)`（子栏目如 `ai/claude-code/`）
+- AI 编程：`src/content/docs/ai/*.md(x)`（子栏目如 `ai/legacy-project/`、`ai/claude-code/`）
 - 作品：`src/content/docs/projects/*.md(x)`
 - 侧边栏 / 站点信息：`astro.config.mjs`
 - 主题色：`src/styles/global.css`

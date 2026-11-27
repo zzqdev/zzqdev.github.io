@@ -166,4 +166,4 @@ Subagents 则是另一类问题的解法——主对话被几万行代码污染�
 
 下一篇会顺着那条主链路走一遍——Spec、Plan、执行、Review、验证，以及 Plan Mode / Permission / Hooks 分别卡在链路的哪一截。
 
-→ [03 主链路：一次协作怎么走](/ai/claude-code/03-main-path/)
+→ [03 主链路：一次协作怎么走](/ai/legacy-project/03-main-path/)

@@ -210,6 +210,6 @@ Bun 用约 6 天、靠 Claude Code 完成大规模 Zig→Rust 迁移这类故事
 
 全貌只回答「它是什么、边界在哪」。下一篇换镜头：
 
-→ [02 目录地图：顶层结构](/ai/claude-code/02-repo-map/)
+→ [02 目录地图：顶层结构](/ai/legacy-project/02-repo-map/)
 
 先看层次，再看目录：模型 / 工具 / 配置约束分别长什么样，CLAUDE.md、Skills、MCP、spec 产物在仓库里通常落在哪，陌生项目按什么顺序读。
