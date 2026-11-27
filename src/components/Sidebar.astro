@@ -1,0 +1,64 @@
+---
+import MobileMenuFooter from 'virtual:starlight/components/MobileMenuFooter';
+import SidebarPersister from '@astrojs/starlight/components/SidebarPersister.astro';
+import SidebarSublist from '@astrojs/starlight/components/SidebarSublist.astro';
+
+const { sidebar } = Astro.locals.starlightRoute;
+const pathname = Astro.url.pathname;
+
+/** Top-nav section → sidebar group label */
+const sectionByPath = [
+	{ prefix: '/notes', label: '技术笔记' },
+	{ prefix: '/projects', label: '作品' },
+] as const;
+
+const activeSection = sectionByPath.find(({ prefix }) => pathname.startsWith(prefix));
+
+/**
+ * When a top-nav section is active, only show that group's pages
+ * (flatten one level so the group title isn't duplicated under the top nav).
+ */
+function scopedSidebar(entries: typeof sidebar) {
+	if (!activeSection) return entries;
+
+	const group = entries.find(
+		(entry) => entry.type === 'group' && entry.label === activeSection.label,
+	);
+
+	if (group && group.type === 'group') {
+		return group.entries;
+	}
+
+	return entries.filter((entry) => {
+		if (entry.type === 'link') return entry.href.includes(activeSection.prefix);
+		return entry.label === activeSection.label;
+	});
+}
+
+const scoped = scopedSidebar(sidebar);
+---
+
+{
+	activeSection && (
+		<p class="sidebar-section-label">{activeSection.label}</p>
+	)
+}
+
+<SidebarPersister>
+	<SidebarSublist sublist={scoped} />
+</SidebarPersister>
+
+<div class="md:sl-hidden">
+	<MobileMenuFooter />
+</div>
+
+<style>
+	.sidebar-section-label {
+		margin: 0 0 0.65rem;
+		padding-inline: 0.625rem;
+		font-size: var(--sl-text-xs);
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		color: var(--sl-color-gray-3);
+	}
+</style>

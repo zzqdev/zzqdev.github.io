@@ -34,6 +34,10 @@ export default defineConfig({
 				},
 			],
 			customCss: ['./src/styles/global.css'],
+			components: {
+				Header: './src/components/Header.astro',
+				Sidebar: './src/components/Sidebar.astro',
+			},
 		}),
 	],
 	vite: {

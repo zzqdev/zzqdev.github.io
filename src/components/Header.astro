@@ -1,0 +1,165 @@
+---
+import config from 'virtual:starlight/user-config';
+
+import LanguageSelect from 'virtual:starlight/components/LanguageSelect';
+import Search from 'virtual:starlight/components/Search';
+import SiteTitle from 'virtual:starlight/components/SiteTitle';
+import SocialIcons from 'virtual:starlight/components/SocialIcons';
+import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
+
+/**
+ * Render the `Search` component if Pagefind is enabled or the default search component has been overridden.
+ */
+const shouldRenderSearch =
+	config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
+
+const pathname = Astro.url.pathname;
+const nav = [
+	{ label: '技术笔记', href: '/notes/example/' },
+	{ label: '作品', href: '/projects/' },
+];
+
+const isActive = (href: string) => {
+	if (href.startsWith('/notes')) return pathname.startsWith('/notes');
+	if (href.startsWith('/projects')) return pathname.startsWith('/projects');
+	return pathname === href || pathname === href.replace(/\/$/, '');
+};
+---
+
+<div class="header">
+	<div class="title-wrapper sl-flex">
+		<SiteTitle />
+	</div>
+
+	<nav class="top-nav print:hidden" aria-label="站点分区">
+		{
+			nav.map(({ label, href }) => (
+				<a href={href} aria-current={isActive(href) ? 'page' : undefined}>
+					{label}
+				</a>
+			))
+		}
+	</nav>
+
+	<div class="trailing sl-flex print:hidden">
+		{shouldRenderSearch && <Search />}
+		<div class="sl-hidden md:sl-flex right-group">
+			<div class="sl-flex social-icons">
+				<SocialIcons />
+			</div>
+			<ThemeSelect />
+			<LanguageSelect />
+		</div>
+	</div>
+</div>
+
+<style>
+	@layer starlight.core {
+		.header {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			height: 100%;
+		}
+
+		.title-wrapper {
+			overflow: clip;
+			padding: 0.25rem;
+			margin: -0.25rem;
+			min-width: 0;
+			flex-shrink: 0;
+		}
+
+		.top-nav {
+			display: none;
+			align-items: center;
+			gap: 0.25rem;
+			min-width: 0;
+			flex: 1 1 auto;
+		}
+
+		.top-nav a {
+			padding: 0.35rem 0.7rem;
+			border-radius: 9999px;
+			font-size: var(--sl-text-sm);
+			font-weight: 500;
+			color: var(--sl-color-gray-2);
+			text-decoration: none;
+			white-space: nowrap;
+			transition:
+				color 0.15s ease,
+				background-color 0.15s ease;
+		}
+
+		.top-nav a:hover {
+			color: var(--sl-color-white);
+			background-color: var(--sl-color-gray-6);
+		}
+
+		.top-nav a[aria-current='page'] {
+			color: var(--sl-color-accent-high);
+			background-color: var(--sl-color-accent-low);
+		}
+
+		.trailing {
+			align-items: center;
+			gap: 0.75rem;
+			margin-inline-start: auto;
+			flex-shrink: 0;
+		}
+
+		.right-group,
+		.social-icons {
+			gap: 0.75rem;
+			align-items: center;
+		}
+
+		.social-icons::after {
+			content: '';
+			height: 1.25rem;
+			border-inline-end: 1px solid var(--sl-color-hairline);
+		}
+
+		@media (min-width: 50rem) {
+			.top-nav {
+				display: flex;
+			}
+
+			.trailing :global(site-search) {
+				width: auto;
+			}
+
+			.trailing :global(button[data-open-modal]) {
+				width: auto;
+				min-width: 11rem;
+				max-width: 14rem;
+			}
+
+			/*
+			 * Site title occupies the sidebar column; primary nav's left edge
+			 * aligns with the sidebar hairline. Same on splash pages.
+			 */
+			.header {
+				--header-title-col: calc(var(--sl-sidebar-width) - var(--sl-nav-pad-x));
+				display: grid;
+				grid-template-columns: var(--header-title-col) minmax(0, 1fr) auto;
+				column-gap: 0;
+				row-gap: 0;
+				align-items: center;
+			}
+
+			.title-wrapper {
+				width: 100%;
+			}
+
+			.top-nav {
+				flex: initial;
+			}
+
+			.trailing {
+				margin-inline-start: 0;
+				padding-inline-start: 1.25rem;
+			}
+		}
+	}
+</style>
