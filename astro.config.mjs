@@ -36,8 +36,13 @@ export default defineConfig({
 						{
 							label: 'Claude Code',
 							items: [
-								{ label: 'Claude Code 概览', slug: 'ai/claude-code' },
-								{ label: 'Claude Code 入门', slug: 'ai/claude-code/getting-started' },
+								{ label: '文章目录', slug: 'ai/claude-code' },
+								{ label: '01 全貌', slug: 'ai/claude-code/01-overview' },
+								{ label: '02 目录地图', slug: 'ai/claude-code/02-repo-map' },
+								{ label: '03 主链路', slug: 'ai/claude-code/03-main-path' },
+								{ label: '04 关键模块', slug: 'ai/claude-code/04-modules' },
+								{ label: '05 关系', slug: 'ai/claude-code/05-relations' },
+								{ label: '06 改动入口', slug: 'ai/claude-code/06-change-entry' },
 							],
 						},
 					],
