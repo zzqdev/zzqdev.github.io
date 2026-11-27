@@ -45,7 +45,18 @@ export default defineConfig({
 								{ label: '06 改动入口', slug: 'ai/legacy-project/06-change-entry' },
 							],
 						},
-						{ label: 'Claude Code', slug: 'ai/claude-code' },
+						{
+							label: 'Claude Code',
+							items: [
+								{ label: '文章目录', slug: 'ai/claude-code' },
+								{ label: '01 系统全貌', slug: 'ai/claude-code/01-system' },
+								{ label: '02 落盘地图', slug: 'ai/claude-code/02-layout' },
+								{ label: '03 主循环', slug: 'ai/claude-code/03-loop' },
+								{ label: '04 能力面', slug: 'ai/claude-code/04-capabilities' },
+								{ label: '05 咬合', slug: 'ai/claude-code/05-wiring' },
+								{ label: '06 改动入口', slug: 'ai/claude-code/06-extend' },
+							],
+						},
 					],
 				},
 				{
