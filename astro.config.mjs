@@ -33,6 +33,13 @@ export default defineConfig({
 					items: [
 						{ label: 'AI 编程入门', slug: 'ai' },
 						{ label: 'Cursor 使用备忘', slug: 'ai/cursor-tips' },
+						{
+							label: 'Claude Code',
+							items: [
+								{ label: 'Claude Code 概览', slug: 'ai/claude-code' },
+								{ label: 'Claude Code 入门', slug: 'ai/claude-code/getting-started' },
+							],
+						},
 					],
 				},
 				{
