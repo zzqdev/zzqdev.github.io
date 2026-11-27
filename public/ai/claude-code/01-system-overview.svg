@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1280" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1280" viewBox="0 0 1080 1280" role="img" aria-labelledby="title desc">
   <title id="title">Claude Code 系统架构</title>
   <desc id="desc">控制面、运行面、模型、可及面与输出的系统架构</desc>
   <defs>

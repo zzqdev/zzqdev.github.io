@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
   <title id="title">Claude Code · 输入层：进 Session 的材料</title>
   <desc id="desc">说明、策略、历史、定义与加载开关如何进入 Context</desc>
   <defs>

@@ -26,6 +26,9 @@ importers:
       tailwindcss:
         specifier: ^4.2.4
         version: 4.3.5
+      viewerjs:
+        specifier: ^1.15.2
+        version: 1.15.2
 
 packages:
 
@@ -1758,6 +1761,9 @@ packages:
 
   vfile@6.0.3:
     resolution: {integrity: sha512-KzIbH/9tXat2u30jf+smMwFCsno4wHVdNmzFyL+T/L3UGqqk6JKfVqOFOZEpZSHADH1k40ab6NUIXZq422ov3Q==}
+
+  viewerjs@1.15.2:
+    resolution: {integrity: sha512-CYEqSFfPUSnmn1PjrhYxXOScaUC7n8+NpSqI+MrOSM8wcKPe35MlwQYwksuD5rjFkYv/ePmY5NsUa51uRNN2jA==}
 
   vite@8.3.8:
     resolution: {integrity: sha512-LzOn3h9rG/0vhLdXrV4yJ4QFA9eEoqCl+Yx+kGJd7aB9w6nfNgVHKSYwLPZUHrz4ZGa+t+kXjV9itvcHDLQouA==}
@@ -3680,6 +3686,8 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.3
       vfile-message: 4.0.4
+
+  viewerjs@1.15.2: {}
 
   vite@8.3.8(@types/node@26.6.11)(jiti@2.7.0)(yaml@2.9.1):
     dependencies:
