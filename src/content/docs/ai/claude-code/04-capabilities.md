@@ -59,6 +59,15 @@ vs Skills：总是知道 vs 有时需要 / 可 `/` 触发。
 Markdown 说明书（知识或工作流），不是二进制插件。  
 显式 `/deploy`，或描述匹配当前任务时由模型拉取。可与 Subagent 组合。
 
+常见两种用法（可并存）：
+
+| 用法 | 典型内容 | 怎么触发 |
+| --- | --- | --- |
+| **规范 / 知识** | 约定、检查清单、领域说明 | 多半靠 `description` 匹配，模型判定相关时加载 |
+| **固定流程** | 发版检查、固定多步操作 | 常配合 `/name`；也可用 `disable-model-invocation` 只允许斜杠触发 |
+
+**渐进式加载**（官方 Skills 的常见做法）：技能目录先在；`SKILL.md` 正文按需进 Context；更长的参考材料放在技能目录下的其它文件里，用到再读——避免一上来灌满窗口。
+
 ### MCP
 
 给的是**行动能力**（数据库、Slack、浏览器…），不是「怎么写 commit message」的知识。  
@@ -70,10 +79,26 @@ SessionStart、PreToolUse、PostToolUse、Stop、SessionEnd…
 **确定性**：事件到了就跑。适合格式化、拦 `rm -rf`、记账、通知。  
 「不要改 .env」写在 md 里只是请求；PreToolUse 拦住才是强制。
 
+职责上常这样分：
+
+- **PreToolUse** — 执行前守门：拦危险命令、挡敏感路径  
+- **PostToolUse** — 执行后质量：格式化、lint、记审计日志  
+
 ### Subagents
 
-主环需要隔离工人时（搜很多文件、并行查证）；摘要回主会话，中间过程不塞爆主 Context。  
-vs Agent teams：同 Session 内 vs 多 Session（实验向）。
+主环需要隔离工人时委托；**独立 loop**，摘要回主会话，中间过程不塞爆主 Context。  
+子代理不能再生成子代理（一层委托）。
+
+适合动手的场景：
+
+| 场景 | 为什么用 Subagent |
+| --- | --- |
+| 全库搜索 / 大范围探查 | 中间过程隔离，主会话只收摘要 |
+| 只读审查 | 权限收窄，降低误改风险 |
+| 测试输出、长日志 | 高噪声消化后再汇报 |
+| 彼此独立的多路探查 | 可并行，再在主会话汇总 |
+
+vs Agent teams：同 Session 内的工人 vs 多 Session 协作（后者偏 experimental）。
 
 ### Output style
 
@@ -91,10 +116,11 @@ vs CLAUDE.md：项目事实与规矩 vs 这会儿怎么答。
 | 你反复遇到 | 加什么 |
 | --- | --- |
 | 同一条约定说两遍还错 | CLAUDE.md / rules |
-| 同一段开场 prompt 打第三遍 | Skill（可 `/`） |
+| 同一段开场 prompt 打第三遍 | Skill（可 `/`）；规范类靠 description，流程类可强制斜杠 |
 | 总从浏览器抄 Claude 看不见的数据 | MCP |
-| 必须每次编辑后 lint | Hook |
-| 支线任务淹没主对话 | Subagent |
+| 必须每次编辑后 lint / 格式化 | PostToolUse Hook |
+| 危险命令只靠「请小心」 | deny 或 PreToolUse Hook |
+| 支线搜库、长日志淹没主对话 | Subagent（先隔离，再堆更多写进 Context 的说明） |
 | 第二家仓库要同一套 | Plugin |
 
 ---
@@ -103,11 +129,12 @@ vs CLAUDE.md：项目事实与规矩 vs 这会儿怎么答。
 
 1. **CLAUDE.md vs Skills** — 启动必加载 vs 按需 / 斜杠  
 2. **Skill vs MCP** — 教怎么做 vs 能调用的外部动作  
-3. **Hooks vs 一切说明** — 事件必跑 vs 给模型看的请求  
+3. **Hooks vs 一切说明** — 事件必跑 vs 给模型看的请求；Pre 守门 vs Post 质量  
 4. **Subagent vs Agent teams** — 同 Session 工人 vs 多 Session 协作  
 5. **Plugin vs 新引擎** — 打包单元，不是第五种运行时  
+6. **规范型 Skill vs 流程型 Skill** — description 匹配 vs 常 `/name`（可 `disable-model-invocation`）  
 
-能指着表说出至少五个扩展的「何时调用」，并分清说明 / 工具 / 事件三类，这一篇就算过关。
+能指着表说出至少五个扩展的「何时调用」，并分清说明 / 工具 / 事件三类，这一篇就算过关。动手见 [07 实操](/ai/claude-code/07-practice/)。
 
 ---
 

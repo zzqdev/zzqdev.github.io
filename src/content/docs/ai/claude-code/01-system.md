@@ -65,6 +65,8 @@ Settings 同 key 时大致：**Managed → CLI `--settings` → 项目 local →
 | **Orchestration** | Subagents、Dynamic workflow——怎么拆任务、怎么隔离跑 |
 | **执行落点** | Local / Cloud / Remote Control——问「跑在哪」，与策略面正交 |
 
+官方谈 agentic harness 时，常把 **Tools、Context、Memory、Hooks、Permissions** 放在一起说。和上表不打架，只是切口不同：Tools / Context 同名；Memory 主要落在输入层（CLAUDE.md、auto memory 等）；Hooks 在扩展挂载里；Permissions 在 Gate。对照文档时按「同一套能力、不同切法」读即可。
+
 虚线很关键：**工具结果必须回灌 Context**，主环才能转下去。
 
 **扩展挂载**叠在 Loop 上，不是另起引擎。日常定制最常摸这几块——关键是「何时调用」：

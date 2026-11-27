@@ -30,7 +30,21 @@ description: 进 Session 的可控材料——说明、策略、Output style、�
 | **授权 / 权限模式** | 约束 Gate，不全是正文 | 影响能不能执行 |
 | **加载面开关** | `--bare`、env 等 | 决定哪些材料根本不加载 |
 
-说明文件是 **context，不是强制配置**——「永远别碰 `.env`」写在 md 里只是请求；要拦死用 Hook。
+说明文件是 **context，不是强制配置**——「永远别碰 `.env`」写在 md 里只是请求；要拦死用 Hook 或 Settings 里的 deny。
+
+**分流（写哪）：**
+
+- **每次 Session 都要知道的** → `CLAUDE.md`，或无 `paths` 的 rules（启动就进 Context；宜短）  
+- **偶尔 / 专题才要的** → Skills，或带 `paths` 的 rules（按需进 Context，少占窗口）
+
+**两种「规则」别混：**
+
+| | 形态 | 作用 |
+| --- | --- | --- |
+| **指令向** | `CLAUDE.md`、`.claude/rules/` | 给模型看的说明——请求，不保证每次执行 |
+| **权限向** | Settings 的 allow / ask / deny，以及 Hook | Gate 上的硬约束——拦得住、放得行 |
+
+「永远不要读 `.env`」只写在 md 里仍可能被忽略；要硬拦，用 deny 或 PreToolUse Hook。
 
 ---
 
@@ -232,9 +246,10 @@ CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1 claude --add-dir ../shared-config
 2. **CLAUDE.md vs Auto memory** — 你写的指令 vs Claude 自己记的笔记  
 3. **CLAUDE.md vs Output style** — 项目事实 vs 整段 Session 的答法  
 4. **CLAUDE.md vs Skills** — 启动必加载 vs 按需 / `/name`  
-5. **说明 vs Hook** — md 是请求；要「每次必发生 / 必拦住」用 Hook  
+5. **说明 vs Hook / deny** — md / rules 是请求；要「每次必发生 / 必拦住」用 Hook 或权限规则  
+6. **每次必载 vs 偶尔才要** — 前者进 CLAUDE.md / 无 paths 的 rules；后者进 Skill 或带 paths 的 rules  
 
-能说出每类材料「写哪、何时进 Context」，并用 `/init`、`/memory`、`--bare` 收窄一次输入，这一篇就算过关。
+能说出每类材料「写哪、何时进 Context」，分清指令向说明与权限向硬约束，并用 `/init`、`/memory`、`--bare` 收窄一次输入，这一篇就算过关。
 
 ---
 

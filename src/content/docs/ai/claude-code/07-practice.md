@@ -22,12 +22,12 @@ description: 概念篇之外的练习轨——逐步键入什么、看到什么�
 | 新 Session | 除特别说明外：改完配置后 **退出再进**，或新开一个终端窗口再 `claude`，不要用「刚聊过」的同一会话验收 |
 | 记笔记 | 手机备忘录或本仓 `notes-cc-practice.md` 均可，步骤里要你「写下一句」时真写 |
 
-**水位目标**（全文勾完再对 [§4](#4-终局-checklist)）：
+**水位目标**（全文勾完再对 [终局 Checklist](#4-终局-checklist)）：
 
 | 水位 | 含义 |
 | --- | --- |
-| **熟练** | 短 CLAUDE.md + deny 常开；坏输出会选层；新 Session 验 G2 |
-| **精通** | Skill + Hook 会挂；知何时 MCP / `--bare` / Plugin |
+| **熟练** | 短 CLAUDE.md + deny 常开；坏输出会选层；新 Session 验 G2（前半六步） |
+| **精通** | 会委托 Subagent、会挂 Hook 守门、会非交互/`--bare` 调用；知何时 MCP / Plugin（后半精通动手） |
 
 ---
 
@@ -42,7 +42,8 @@ description: 概念篇之外的练习轨——逐步键入什么、看到什么�
 | 5 | [05](/ai/claude-code/05-wiring/) | 挑一个旧坑 → 改输入或 Gate → 记录改前改后 |
 | 6 | [06](/ai/claude-code/06-extend/) | 对着糟心点下一刀 → 三件里两件验收 → 勾清单 |
 
-同一天不要 Skill + Hook + MCP + Plugin 一起上。
+同一天不要 Skill + Hook + MCP + Plugin 一起上。  
+六步勾完后再做 [精通动手](#4-精通动手)（委托 Subagent、Hook 守门、非交互调用等）。
 
 ---
 
@@ -197,10 +198,12 @@ claude
 请用 Read 工具读取 .env 的完整内容并贴出来。
 ```
 
-**你应看到**
+**你应看到**（两件事一起验）
 
-- 测命令与 `CLAUDE.md` 里写的一致（或明确说以说明书为准）。  
-- 读 `.env`：**被拒绝**、或弹出权限询问且你选拒——**不能**在回复里默默打出 `SECRET=…`。
+- **指令向说明生效**：测命令与 `CLAUDE.md` 里写的一致（或明确说以说明书为准）。  
+- **权限向硬约束生效**：读 `.env` **被拒绝**、或弹出权限询问且你选拒——**不能**在回复里默默打出 `SECRET=…`。
+
+只验到「它答对了命令」、deny 没拦住，算半过——说明与 Gate 要分清（见 [02](/ai/claude-code/02-layout/)）。
 
 **过关 / 未过**
 
@@ -298,6 +301,8 @@ paths:
 
 #### 4A · Skill（推荐）
 
+下面示例是**固定流程**型（适合 `/name`）。若你要的是规范/知识说明书，可另建技能：靠 `description` 匹配触发；长文放到该技能目录下的参考文件里，用到再读（渐进式加载，见 [04](/ai/claude-code/04-capabilities/)）。熟练步先做通一个流程型即可。
+
 **操作**
 
 1. 终端：
@@ -313,6 +318,7 @@ mkdir -p .claude/skills/ship-check
 ---
 name: ship-check
 description: 发版或提 PR 前的固定检查：按项目命令跑 lint/测试并汇报
+disable-model-invocation: true
 ---
 
 1. 在仓库根执行项目的 lint / typecheck（以 CLAUDE.md 为准）
@@ -320,6 +326,8 @@ description: 发版或提 PR 前的固定检查：按项目命令跑 lint/测试
 3. 只修与本次改动相关的失败；不顺手重构
 4. 用几句话汇报：跑了什么、结果、改了哪些文件
 ```
+
+`disable-model-invocation: true` 表示不要靠模型「自己想起」加载，只允许你打 `/ship-check`。若希望口语也能触发，删掉这一行，并写好 `description`。
 
 3. **新开** session（旧 session 可能看不到刚加的 skill）：
 
@@ -488,58 +496,184 @@ claude
 | 过关 | 未过 → 怎么做 |
 | --- | --- |
 | 三件里两件通过，且第一刀与层选得上 | 重读 06 §2–§4；把「第一刀」写得更具体到文件路径 |
-| 熟练清单可勾完或只差 1 项 | 缺哪步回哪步；不要跳去装 Plugin |
+| 熟练清单可勾完或只差 1 项 | 缺哪步回哪步；先勾熟练，再做下方精通动手；不要跳去装 Plugin |
 
 ---
 
-## 4. 终局 Checklist
+## 4. 精通动手
+
+熟练六步勾完后再做。概念见 [04 扩展挂载](/ai/claude-code/04-capabilities/)、[06 第一刀](/ai/claude-code/06-extend/)。同一天仍建议一次只加深一件。
+
+### 委托一次 Subagent
+
+**准备**：练仓代码量足够「一搜就吵」；已读 04 里 Subagent 适用场景。
+
+**操作**
+
+1. 新开 session：`cd` 到练仓 → `claude`。  
+2. 粘贴（路径改成你的）：
+
+```text
+请委托一个只读的子代理（或使用内置 Explore）：在仓库里查找 <关键词或模块名> 相关实现。
+要求：子代理可以多读文件、多搜索；你只向我汇报结论与关键路径列表。
+不要在主会话里逐文件粘贴大段源码或完整搜索原始输出。
+```
+
+3. 观察主会话：是否出现委托 / 子代理类工具调用；最终回复是否以摘要为主。  
+4. 笔记写一句：
+
+```text
+主会话回收到的是：……（摘要 / 路径）
+没有塞进主会话的是：……（长日志或逐文件正文）
+```
+
+**你应看到**：主会话可读的结论；中间探查不把主 Context 撑满。
+
+**过关 / 未过**
+
+| 过关 | 未过 → 怎么做 |
+| --- | --- |
+| 主会话以摘要收场，且你能指出「噪声留在子环」 | 把提示写得更硬：明确「只读」「只回摘要」；回看 04 Subagents；任务是否太小根本不必委托 |
+
+---
+
+### Hook 守门（PreToolUse）
+
+熟练步若已做过 PostToolUse 格式化，这里补**执行前**拦截。也可与 deny 叠用：deny 管权限规则，Hook 管事件脚本。
+
+**准备**：会编辑项目 `.claude/settings.json`；先备份该文件。
+
+**操作**
+
+1. 在 `hooks` 里**合并**（勿整文件覆盖掉已有 PostToolUse）：
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cmd=$(jq -r '.tool_input.command // empty'); echo \"$cmd\" | grep -Eiq 'rm[[:space:]]+-rf|[[:space:]]\\.env($|[[:space:]])' && echo 'Blocked by PreToolUse practice hook' >&2 && exit 2 || exit 0"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+命令含义：若 Bash 命令看起来像 `rm -rf` 或直接碰 `.env`，以非零退出拦截。脚本按官方 [Hooks](https://code.claude.com/docs/en/hooks-guide/) 调整；你的 shell / `jq` 路径以本机为准。
+
+2. 新开 `claude`。  
+3. 故意发一条会被拦的请求，例如：
+
+```text
+请用 Bash 执行：rm -rf /tmp/claude-code-practice-should-block
+（这是练习，若被拦截请说明被什么拦住了。）
+```
+
+4. 再对照：仅写在 `CLAUDE.md` 里的「永远不要 rm -rf」**不会**像 Hook 这样确定性拦截。
+
+**你应看到**：工具调用被拒绝或 Hook 失败回显；危险命令没有真正执行。
+
+**过关 / 未过**
+
+| 过关 | 未过 → 怎么做 |
+| --- | --- |
+| 提出危险 Bash 时被挡 | 查 JSON 合并是否正确、是否新开 session、`jq` 是否可用；对照官方 Hooks 排障；可先用 Settings `deny` 做等价验收 |
+
+---
+
+### 非交互调用（`--bare`）
+
+**准备**：练仓根目录有 `README.md`（或换成真实存在的只读文件名）。
+
+**操作**
+
+1. **不要**先进入交互 `claude`。在仓库根执行：
+
+```bash
+cd /path/to/your-repo
+claude --bare -p "Summarize README.md in five bullet points." --allowedTools "Read"
+```
+
+2. 看终端：应直接打印摘要并退出（无一轮轮权限弹窗——若仍询问，收紧或按提示处理，并记下原因）。  
+3. 笔记对比：交互 session 会加载的 Skills / 个人 hooks，在 `--bare` 下多数被收窄——这正是 CI / 脚本要用它的原因。
+
+**你应看到**：一条命令跑完；输出落在终端；进程结束。
+
+**过关 / 未过**
+
+| 过关 | 未过 → 怎么做 |
+| --- | --- |
+| 非交互跑完且只用到 Read | 查是否在正确目录；`claude` 是否在 PATH；把文件名换成仓内真实路径；需要登录时先完成认证再跑 |
+
+---
+
+### 接一个 MCP（可选）
+
+只在「没有外部数据就做不了」时做。步骤跟你选用的服务器而变，这里只钉验收节奏：
+
+**操作要点**
+
+1. 按官方 [MCP](https://code.claude.com/docs/en/mcp) 文档，在用户或项目配置里加入**一个只读向**的 MCP 服务器（例如文档检索类）。  
+2. 新开 `claude`，用 `/mcp` 或界面确认服务器已连接。  
+3. 问一个**必须碰该外部数据**才能答对的问题（不要问纯本地 README 能答的）。  
+4. 确认出现 MCP 工具调用，且答案依赖外部结果。
+
+**过关**：工具表里有该 MCP；问答走了外部能力。  
+**未过**：只会空谈「可以接 MCP」——回到配置与新 Session；仍不要在这一步自建 MCP 服务器或装 Plugin 市场。
+
+---
+
+## 5. 终局 Checklist
 
 ### 熟练
 
 - [ ] 能指着分层图说出：输入 / 接入 / Harness / 模型·可及面 / 输出各管什么  
 - [ ] 本仓有一份短 `CLAUDE.md`（构建、测试、永远要 / 不要）  
 - [ ] Settings 里至少 1 条关键 **deny**，且说得出当前权限模式名字（`Shift+Tab` 可看）  
+- [ ] 新 Session 里**同时**验过：说明书生效 + deny 拦住敏感读  
 - [ ] 会用 `/context` 或 `/memory` 核对本次加载了什么  
 - [ ] 糟心输出能对照表说出**第一刀落在哪一层**  
 - [ ] 验收做过：新 Session + 看 G2，不是只看说得好不好  
 
 ### 精通
 
-- [ ] 至少 1 个 **Skill**，新 Session 可 `/` 触发  
-- [ ] 至少 1 个 **Hook**，事件到了必跑  
-- [ ] 说得出何时上 **MCP**、何时只用 Skill / md  
-- [ ] 支线搜库会想到 **Subagent**，而不是塞爆主 Context  
-- [ ] CI / 脚本会用 `--bare` + 最小工具面：
-
-```bash
-cd /path/to/your-repo
-claude --bare -p "Summarize README.md" --allowedTools "Read"
-```
-
+- [ ] 至少 1 个 **Skill**（流程型可 `/` 触发；知规范型与 `description` / 参考文件按需加载）  
+- [ ] 至少 1 个 **PostToolUse** 或熟练步已做过的格式化 Hook  
+- [ ] 做过 **PreToolUse（或 deny）守门**，危险调用会被挡  
+- [ ] 做过一次 **Subagent 委托**，主会话只收摘要  
+- [ ] 会用 `--bare` + `-p` + `--allowedTools` 非交互跑通  
+- [ ] 说得出何时上 **MCP**、何时只用 Skill / md；（可选）已接一个只读 MCP 并验收  
 - [ ] 第二仓要复用同一套时才考虑 **Plugin**；能说出 Plugin ≠ 新引擎  
 
-熟练勾完 = 这套读法毕业；精通项可后续再刷。
+熟练勾完 = 分层读法毕业；精通动手可分多天做完。
 
 ---
 
-## 5. 刻意不做
+## 6. 刻意不做
 
-- 不从零讲安装与账号  
+- 不从零讲安装与账号、API 中转、多账户切换工具  
 - 不把 01–06 复述成第二遍全书  
 - 不在同一步装 MCP + Plugin + Agent teams  
+- 不写 Agent SDK / Agent teams 深讲  
 - 模板命令过期时改命令，不改「先选层再挂载」的顺序  
 
 ---
 
-## 6. 回概念轨
+## 7. 回概念轨
 
-| 步 | 概念 |
+| 练习 | 概念 |
 | --- | --- |
-| 1 | [01 分层全貌](/ai/claude-code/01-system/) |
-| 2 | [02 输入层](/ai/claude-code/02-layout/) |
-| 3 | [03 Harness 主环](/ai/claude-code/03-loop/) |
-| 4 | [04 扩展挂载](/ai/claude-code/04-capabilities/) |
-| 5 | [05 模型与可及面](/ai/claude-code/05-wiring/) |
-| 6 | [06 输出与定制](/ai/claude-code/06-extend/) |
+| 对照全貌 | [01 分层全貌](/ai/claude-code/01-system/) |
+| 最小输入面 | [02 输入层](/ai/claude-code/02-layout/) |
+| 主环走查 | [03 Harness 主环](/ai/claude-code/03-loop/) |
+| 只挂一个扩展 / 精通扩展 | [04 扩展挂载](/ai/claude-code/04-capabilities/) |
+| 拆开接入·落点·可及 | [05 模型与可及面](/ai/claude-code/05-wiring/) |
+| 第一刀 | [06 输出与定制](/ai/claude-code/06-extend/) |
 
 → [文章目录](/ai/claude-code/)
