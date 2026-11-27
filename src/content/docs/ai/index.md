@@ -9,6 +9,7 @@ description: 用 AI 辅助编程的实践笔记入口
 
 - [老项目理解](/ai/legacy-project/)：心法 → 制图 → 全景 → 契约 → 沉淀 → 串跑
 - [Claude Code](/ai/claude-code/)：分层读法（全貌 → 输入/接入 → Harness 主环 → 扩展 → 模型/可及面 → 输出）
+- [SDD](/ai/sdd/)：规格驱动开发（先规格、再实现与验收）
 - [Cursor 使用备忘](/ai/cursor-tips/)
 
 ## 可以记什么

@@ -59,6 +59,10 @@ export default defineConfig({
 								{ label: '07 实操', slug: 'ai/claude-code/07-practice' },
 							],
 						},
+						{
+							label: 'SDD',
+							items: [{ label: '文章目录', slug: 'ai/sdd' }],
+						},
 					],
 				},
 				{
