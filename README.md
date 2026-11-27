@@ -19,6 +19,7 @@ pnpm preview
 | --- | --- |
 | `src/content/docs/index.mdx` | 首页（splash，无侧栏） |
 | `src/content/docs/notes/` | 技术笔记 |
+| `src/content/docs/ai/` | AI 编程 |
 | `src/content/docs/projects/` | 作品 / 项目 |
 | `astro.config.mjs` | 站点信息、侧边栏 |
 | `src/styles/global.css` | 主题色与 Fumadocs 风格微调 |

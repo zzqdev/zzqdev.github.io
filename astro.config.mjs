@@ -29,6 +29,13 @@ export default defineConfig({
 					items: [{ label: '示例笔记', slug: 'notes/example' }],
 				},
 				{
+					label: 'AI 编程',
+					items: [
+						{ label: 'AI 编程入门', slug: 'ai' },
+						{ label: 'Cursor 使用备忘', slug: 'ai/cursor-tips' },
+					],
+				},
+				{
 					label: '作品',
 					items: [{ label: '项目一览', slug: 'projects' }],
 				},

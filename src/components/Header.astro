@@ -16,11 +16,13 @@ const shouldRenderSearch =
 const pathname = Astro.url.pathname;
 const nav = [
 	{ label: '技术笔记', href: '/notes/example/' },
+	{ label: 'AI 编程', href: '/ai/' },
 	{ label: '作品', href: '/projects/' },
 ];
 
 const isActive = (href: string) => {
 	if (href.startsWith('/notes')) return pathname.startsWith('/notes');
+	if (href.startsWith('/ai')) return pathname.startsWith('/ai');
 	if (href.startsWith('/projects')) return pathname.startsWith('/projects');
 	return pathname === href || pathname === href.replace(/\/$/, '');
 };
