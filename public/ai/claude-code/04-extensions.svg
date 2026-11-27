@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Claude Code · 扩展何时调用</title>
+  <desc id="desc">扩展叠在 Loop 上；关键是何时调用</desc>
+  <defs>
+    <style>
+      .f{font-family:ui-sans-serif,system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+    </style>
+  </defs>
+
+  <rect width="1200" height="700" fill="#f7f6f3"/>
+  <text class="f" x="600" y="36" text-anchor="middle" fill="#1c1917" font-size="22" font-weight="700">扩展挂载 · 何时调用</text>
+  <text class="f" x="600" y="58" text-anchor="middle" fill="#78716c" font-size="12">叠在主环上，不是另起引擎 · 新人顺序：CLAUDE.md → Skill → MCP → Hook → Plugin</text>
+
+  <!-- loop bar -->
+  <rect x="48" y="84" width="1104" height="44" rx="10" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5"/>
+  <text class="f" x="600" y="112" text-anchor="middle" fill="#9a3412" font-size="14" font-weight="700">Loop · gather → act → verify（扩展往环上插，不替换环）</text>
+
+  <!-- rows -->
+  <rect x="48" y="150" width="1104" height="56" rx="10" fill="#fff" stroke="#ea580c" stroke-width="1.5"/>
+  <rect x="48" y="150" width="220" height="56" rx="10" fill="#ea580c"/>
+  <text class="f" x="158" y="184" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">CLAUDE.md / rules</text>
+  <text class="f" x="720" y="176" text-anchor="middle" fill="#1c1917" font-size="13" font-weight="600">Session 启动自动加载</text>
+  <text class="f" x="720" y="196" text-anchor="middle" fill="#78716c" font-size="12">「永远知道」· 路径 rules 按需</text>
+
+  <rect x="48" y="218" width="1104" height="56" rx="10" fill="#fff" stroke="#f97316" stroke-width="1.5"/>
+  <rect x="48" y="218" width="220" height="56" rx="10" fill="#f97316"/>
+  <text class="f" x="158" y="252" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Skills</text>
+  <text class="f" x="720" y="244" text-anchor="middle" fill="#1c1917" font-size="13" font-weight="600">你打 /name，或模型判定相关</text>
+  <text class="f" x="720" y="264" text-anchor="middle" fill="#78716c" font-size="12">说明书按需进 Context</text>
+
+  <rect x="48" y="286" width="1104" height="56" rx="10" fill="#fff" stroke="#fb923c" stroke-width="1.5"/>
+  <rect x="48" y="286" width="220" height="56" rx="10" fill="#fb923c"/>
+  <text class="f" x="158" y="320" text-anchor="middle" fill="#1c1917" font-size="13" font-weight="700">MCP</text>
+  <text class="f" x="720" y="312" text-anchor="middle" fill="#1c1917" font-size="13" font-weight="600">模型发出 tool call 时</text>
+  <text class="f" x="720" y="332" text-anchor="middle" fill="#78716c" font-size="12">加长 Tools 表 · 外部能力</text>
+
+  <rect x="48" y="354" width="1104" height="56" rx="10" fill="#fff" stroke="#0f766e" stroke-width="2"/>
+  <rect x="48" y="354" width="220" height="56" rx="10" fill="#0f766e"/>
+  <text class="f" x="158" y="388" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Hooks</text>
+  <text class="f" x="720" y="380" text-anchor="middle" fill="#0f766e" font-size="13" font-weight="700">生命周期事件必触发</text>
+  <text class="f" x="720" y="400" text-anchor="middle" fill="#78716c" font-size="12">不靠模型「想起来」· 确定性</text>
+
+  <rect x="48" y="422" width="1104" height="56" rx="10" fill="#fff" stroke="#fdba74" stroke-width="1.5"/>
+  <rect x="48" y="422" width="220" height="56" rx="10" fill="#fdba74"/>
+  <text class="f" x="158" y="456" text-anchor="middle" fill="#1c1917" font-size="13" font-weight="700">Subagents</text>
+  <text class="f" x="720" y="448" text-anchor="middle" fill="#1c1917" font-size="13" font-weight="600">主 Agent 委托隔离任务</text>
+  <text class="f" x="720" y="468" text-anchor="middle" fill="#78716c" font-size="12">独立 loop · 摘要回主会话</text>
+
+  <rect x="48" y="490" width="1104" height="56" rx="10" fill="#fff" stroke="#fed7aa" stroke-width="1.5"/>
+  <rect x="48" y="490" width="220" height="56" rx="10" fill="#fed7aa"/>
+  <text class="f" x="158" y="524" text-anchor="middle" fill="#1c1917" font-size="13" font-weight="700">Output style</text>
+  <text class="f" x="720" y="516" text-anchor="middle" fill="#1c1917" font-size="13" font-weight="600">整段 Session 生效</text>
+  <text class="f" x="720" y="536" text-anchor="middle" fill="#78716c" font-size="12">语气 / 角色 / 格式</text>
+
+  <rect x="48" y="558" width="1104" height="56" rx="10" fill="#fff" stroke="#d6d3d1" stroke-width="1.5"/>
+  <rect x="48" y="558" width="220" height="56" rx="10" fill="#e7e5e4"/>
+  <text class="f" x="158" y="592" text-anchor="middle" fill="#44403c" font-size="13" font-weight="700">Plugins</text>
+  <text class="f" x="720" y="584" text-anchor="middle" fill="#1c1917" font-size="13" font-weight="600">安装后打包带上</text>
+  <text class="f" x="720" y="604" text-anchor="middle" fill="#78716c" font-size="12">Skills / Hooks / MCP / Subagents · 不是新运行时</text>
+
+  <text class="f" x="600" y="660" text-anchor="middle" fill="#a8a29e" font-size="12">三类别混：说明（md / Skill）· 工具（MCP）· 事件（Hook）</text>
+</svg>

@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+  <title id="title">Claude Code · Harness 主环</title>
+  <desc id="desc">gather → act → verify，Context / Gate / Tools，结果回灌</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 z" fill="#44403c"/>
+    </marker>
+    <marker id="arr-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 z" fill="#0f766e"/>
+    </marker>
+    <style>
+      .f{font-family:ui-sans-serif,system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+    </style>
+  </defs>
+
+  <rect width="1200" height="640" fill="#f7f6f3"/>
+  <text class="f" x="600" y="36" text-anchor="middle" fill="#1c1917" font-size="22" font-weight="700">Harness 主环 · gather → act → verify</text>
+  <text class="f" x="600" y="58" text-anchor="middle" fill="#78716c" font-size="12">产品本体：喂 Context、过 Gate、跑 Tools、把结果回灌——人可随时打断</text>
+
+  <!-- three phases -->
+  <rect x="48" y="90" width="340" height="120" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="2.5"/>
+  <text class="f" x="218" y="130" text-anchor="middle" fill="#9a3412" font-size="18" font-weight="700">gather</text>
+  <text class="f" x="218" y="156" text-anchor="middle" fill="#7c2d12" font-size="13">弄清要做什么</text>
+  <text class="f" x="218" y="180" text-anchor="middle" fill="#78716c" font-size="12">搜 · 读 · 看报错 · 问你</text>
+
+  <rect x="430" y="90" width="340" height="120" rx="14" fill="#ea580c" stroke="#c2410c" stroke-width="2.5"/>
+  <text class="f" x="600" y="130" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">act</text>
+  <text class="f" x="600" y="156" text-anchor="middle" fill="#ffedd5" font-size="13">动手</text>
+  <text class="f" x="600" y="180" text-anchor="middle" fill="#fed7aa" font-size="12">改文件 · 跑命令 · MCP · subagent</text>
+
+  <rect x="812" y="90" width="340" height="120" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="2.5"/>
+  <text class="f" x="982" y="130" text-anchor="middle" fill="#9a3412" font-size="18" font-weight="700">verify</text>
+  <text class="f" x="982" y="156" text-anchor="middle" fill="#7c2d12" font-size="13">检查结果</text>
+  <text class="f" x="982" y="180" text-anchor="middle" fill="#78716c" font-size="12">测 · 构建 · 对照 · 回退</text>
+
+  <line x1="388" y1="150" x2="422" y2="150" stroke="#44403c" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="770" y1="150" x2="804" y2="150" stroke="#44403c" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- feedback arc -->
+  <path d="M982 210 L982 250 L218 250 L218 210" fill="none" stroke="#0f766e" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr-teal)"/>
+  <text class="f" x="600" y="242" text-anchor="middle" fill="#0f766e" font-size="12" font-weight="600">不过就再转 · 失败是常态路径</text>
+
+  <!-- core parts -->
+  <text class="f" x="600" y="300" text-anchor="middle" fill="#57534e" font-size="13" font-weight="700">内核零件（服务主环，不替换主环）</text>
+
+  <rect x="48" y="320" width="210" height="100" rx="12" fill="#ffedd5" stroke="#fb923c" stroke-width="1.5"/>
+  <text class="f" x="153" y="358" text-anchor="middle" fill="#9a3412" font-size="15" font-weight="700">Context</text>
+  <text class="f" x="153" y="382" text-anchor="middle" fill="#7c2d12" font-size="12">组装每轮所见</text>
+  <text class="f" x="153" y="404" text-anchor="middle" fill="#78716c" font-size="11">满了 → Compaction</text>
+
+  <rect x="278" y="320" width="210" height="100" rx="12" fill="#ffedd5" stroke="#fb923c" stroke-width="1.5"/>
+  <text class="f" x="383" y="358" text-anchor="middle" fill="#9a3412" font-size="15" font-weight="700">Gate</text>
+  <text class="f" x="383" y="382" text-anchor="middle" fill="#7c2d12" font-size="12">Permission · Sandbox</text>
+  <text class="f" x="383" y="404" text-anchor="middle" fill="#78716c" font-size="11">Checkpoint · trust</text>
+
+  <rect x="508" y="320" width="210" height="100" rx="12" fill="#ea580c" stroke="#c2410c" stroke-width="1.5"/>
+  <text class="f" x="613" y="358" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">Tools</text>
+  <text class="f" x="613" y="382" text-anchor="middle" fill="#ffedd5" font-size="12">内建 + MCP</text>
+  <text class="f" x="613" y="404" text-anchor="middle" fill="#fed7aa" font-size="11">读改搜跑 · 编排</text>
+
+  <rect x="738" y="320" width="210" height="100" rx="12" fill="#ffedd5" stroke="#fb923c" stroke-width="1.5"/>
+  <text class="f" x="843" y="358" text-anchor="middle" fill="#9a3412" font-size="15" font-weight="700">Orchestration</text>
+  <text class="f" x="843" y="382" text-anchor="middle" fill="#7c2d12" font-size="12">Subagents</text>
+  <text class="f" x="843" y="404" text-anchor="middle" fill="#78716c" font-size="11">Dynamic workflow</text>
+
+  <rect x="968" y="320" width="184" height="100" rx="12" fill="#fafaf9" stroke="#d6d3d1" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text class="f" x="1060" y="358" text-anchor="middle" fill="#57534e" font-size="14" font-weight="700">执行落点</text>
+  <text class="f" x="1060" y="382" text-anchor="middle" fill="#78716c" font-size="12">Local / Cloud</text>
+  <text class="f" x="1060" y="404" text-anchor="middle" fill="#a8a29e" font-size="11">Remote Control</text>
+
+  <!-- implement loop -->
+  <rect x="48" y="450" width="1104" height="150" rx="14" fill="#fff" stroke="#d6d3d1" stroke-width="1.5"/>
+  <text class="f" x="72" y="484" fill="#1c1917" font-size="14" font-weight="700">实现向的同一套 loop（CLI 与 Agent SDK 共用）</text>
+  <text class="f" x="72" y="516" fill="#44403c" font-size="13">1. 收 prompt → 2. 模型输出文本和/或 tool calls → 3. 运行时执行（可过 hooks / 权限）</text>
+  <text class="f" x="72" y="544" fill="#44403c" font-size="13">4. tool_result 回灌 Context → 5. 再调模型……直到不再要工具（或你打断 / 触顶）</text>
+  <text class="f" x="72" y="576" fill="#0f766e" font-size="13" font-weight="600">虚线回灌不是装饰：没有它，下一步只能活在上一次幻觉里</text>
+</svg>

@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Claude Code · 输入层：进 Session 的材料</title>
+  <desc id="desc">说明、策略、历史、定义与加载开关如何进入 Context</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 z" fill="#44403c"/>
+    </marker>
+    <style>
+      .f{font-family:ui-sans-serif,system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+    </style>
+  </defs>
+
+  <rect width="1200" height="720" fill="#f7f6f3"/>
+
+  <text class="f" x="600" y="36" text-anchor="middle" fill="#1c1917" font-size="22" font-weight="700">输入层 · 进 Session 的材料</text>
+  <text class="f" x="600" y="58" text-anchor="middle" fill="#78716c" font-size="12">你可控：永远知道什么 · 能干什么 · 怎么答 · 这次带着哪些历史</text>
+
+  <!-- left groups -->
+  <rect x="40" y="84" width="520" height="168" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+  <rect x="40" y="84" width="8" height="168" rx="2" fill="#ea580c"/>
+  <text class="f" x="64" y="112" fill="#9a3412" font-size="14" font-weight="700">你写的说明</text>
+  <text class="f" x="64" y="132" fill="#c2410c" font-size="11">给模型看的 context，不是强制配置</text>
+  <rect x="64" y="148" width="140" height="36" rx="8" fill="#ea580c"/>
+  <text class="f" x="134" y="171" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">CLAUDE.md</text>
+  <rect x="216" y="148" width="140" height="36" rx="8" fill="#f97316"/>
+  <text class="f" x="286" y="171" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">AGENTS.md</text>
+  <rect x="368" y="148" width="160" height="36" rx="8" fill="#fb923c"/>
+  <text class="f" x="448" y="171" text-anchor="middle" fill="#1c1917" font-size="12" font-weight="700">rules</text>
+  <text class="f" x="64" y="220" fill="#78716c" font-size="11">启动加载 · 子目录 / paths 按需 · /init 生成起步版</text>
+
+  <rect x="40" y="272" width="520" height="168" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+  <rect x="40" y="272" width="8" height="168" rx="2" fill="#ea580c"/>
+  <text class="f" x="64" y="300" fill="#9a3412" font-size="14" font-weight="700">策略与气质</text>
+  <text class="f" x="64" y="320" fill="#c2410c" font-size="11">JSON 策略 + 整段 Session 的回复风格</text>
+  <rect x="64" y="336" width="140" height="36" rx="8" fill="#ea580c"/>
+  <text class="f" x="134" y="359" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Settings</text>
+  <rect x="216" y="336" width="140" height="36" rx="8" fill="#f97316"/>
+  <text class="f" x="286" y="359" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Output style</text>
+  <rect x="368" y="336" width="160" height="36" rx="8" fill="#fb923c"/>
+  <text class="f" x="448" y="359" text-anchor="middle" fill="#1c1917" font-size="12" font-weight="700">授权 / 模式</text>
+  <text class="f" x="64" y="408" fill="#78716c" font-size="11">权限 · 模型 · hooks 开关 · 语气 / 角色 / 格式</text>
+
+  <rect x="40" y="460" width="520" height="168" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+  <rect x="40" y="460" width="8" height="168" rx="2" fill="#ea580c"/>
+  <text class="f" x="64" y="488" fill="#9a3412" font-size="14" font-weight="700">历史 · 记忆 · 定义</text>
+  <text class="f" x="64" y="508" fill="#c2410c" font-size="11">续写轨迹、跨 Session 笔记、可复用说明书</text>
+  <rect x="64" y="524" width="140" height="36" rx="8" fill="#ea580c"/>
+  <text class="f" x="134" y="547" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">transcript</text>
+  <rect x="216" y="524" width="140" height="36" rx="8" fill="#f97316"/>
+  <text class="f" x="286" y="547" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Auto memory</text>
+  <rect x="368" y="524" width="160" height="36" rx="8" fill="#fb923c"/>
+  <text class="f" x="448" y="547" text-anchor="middle" fill="#1c1917" font-size="12" font-weight="700">Skills 定义</text>
+  <text class="f" x="64" y="596" fill="#78716c" font-size="11">resume / fork · MEMORY.md 索引 · Skill 正文按需进 Context</text>
+
+  <!-- arrow -->
+  <line x1="580" y1="360" x2="650" y2="360" stroke="#44403c" stroke-width="2.5" marker-end="url(#arr)"/>
+  <text class="f" x="615" y="340" text-anchor="middle" fill="#78716c" font-size="11">装配</text>
+
+  <!-- right: session -->
+  <rect x="668" y="140" width="492" height="400" rx="16" fill="#fff" stroke="#ea580c" stroke-width="3"/>
+  <rect x="668" y="140" width="8" height="400" rx="2" fill="#ea580c"/>
+  <text class="f" x="692" y="176" fill="#9a3412" font-size="16" font-weight="700">Session · Context</text>
+  <text class="f" x="692" y="200" fill="#78716c" font-size="12">一段可 resume / fork 的对话轨迹</text>
+
+  <rect x="692" y="224" width="440" height="64" rx="10" fill="#ffedd5" stroke="#fb923c" stroke-width="1.5"/>
+  <text class="f" x="912" y="252" text-anchor="middle" fill="#9a3412" font-size="13" font-weight="700">当前 turn：任务 / 提问</text>
+  <text class="f" x="912" y="272" text-anchor="middle" fill="#7c2d12" font-size="11">含打断、改向、排队输入</text>
+
+  <rect x="692" y="304" width="440" height="100" rx="10" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5"/>
+  <text class="f" x="912" y="336" text-anchor="middle" fill="#9a3412" font-size="13" font-weight="700">已加载材料</text>
+  <text class="f" x="912" y="360" text-anchor="middle" fill="#7c2d12" font-size="11">说明 · Settings · style · 历史 · memory</text>
+  <text class="f" x="912" y="380" text-anchor="middle" fill="#78716c" font-size="11">Gate 侧：权限模式 / allow·deny · 信任文件夹</text>
+
+  <rect x="692" y="424" width="440" height="84" rx="10" fill="#fafaf9" stroke="#d6d3d1" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text class="f" x="912" y="456" text-anchor="middle" fill="#57534e" font-size="13" font-weight="700">加载面开关</text>
+  <text class="f" x="912" y="480" text-anchor="middle" fill="#78716c" font-size="11">--bare · --setting-sources · disable_* env</text>
+
+  <text class="f" x="914" y="680" text-anchor="middle" fill="#a8a29e" font-size="11">不是接入层（Terminal / IDE）· 不是执行落点（Local / Cloud）</text>
+</svg>

@@ -8,7 +8,7 @@ description: 用 AI 辅助编程的实践笔记入口
 ## 子栏目
 
 - [老项目理解](/ai/legacy-project/)：全局 → 局部 → 关系 → 改动
-- [Claude Code](/ai/claude-code/)：分层读法（架构 → 落盘 → 主循环 → 扩展 → 咬合 → 定制）
+- [Claude Code](/ai/claude-code/)：分层读法（全貌 → 输入/接入 → Harness 主环 → 扩展 → 模型/可及面 → 输出）
 - [Cursor 使用备忘](/ai/cursor-tips/)
 
 ## 可以记什么

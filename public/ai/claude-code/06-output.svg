@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+  <title id="title">Claude Code · 输出层三路与定制第一刀</title>
+  <desc id="desc">G1 / G2 / G3 与从坏输出反推改哪一层</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 z" fill="#44403c"/>
+    </marker>
+    <style>
+      .f{font-family:ui-sans-serif,system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+    </style>
+  </defs>
+
+  <rect width="1200" height="640" fill="#f7f6f3"/>
+  <text class="f" x="600" y="36" text-anchor="middle" fill="#1c1917" font-size="22" font-weight="700">输出层 · 三路产出</text>
+  <text class="f" x="600" y="58" text-anchor="middle" fill="#78716c" font-size="12">定制不是功能购物——对着坏输出选层；机制在 Gate，G3 只描述形态</text>
+
+  <rect x="48" y="90" width="1104" height="48" rx="10" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5"/>
+  <text class="f" x="600" y="120" text-anchor="middle" fill="#9a3412" font-size="14" font-weight="700">Loop 转完（或转的过程中）→ 三路产出</text>
+
+  <!-- G1 G2 G3 -->
+  <rect x="48" y="160" width="350" height="160" rx="14" fill="#fff" stroke="#ea580c" stroke-width="2.5"/>
+  <rect x="48" y="160" width="350" height="44" rx="14" fill="#ea580c"/>
+  <text class="f" x="223" y="188" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">G1 · 给你</text>
+  <text class="f" x="223" y="236" text-anchor="middle" fill="#7c2d12" font-size="13">解释 · 提问 · 计划 · 摘要</text>
+  <text class="f" x="223" y="264" text-anchor="middle" fill="#78716c" font-size="12">验收：读、追问、改向</text>
+  <text class="f" x="223" y="292" text-anchor="middle" fill="#a8a29e" font-size="11">协作设计的一部分</text>
+
+  <rect x="424" y="160" width="350" height="160" rx="14" fill="#ea580c" stroke="#c2410c" stroke-width="2.5"/>
+  <text class="f" x="599" y="198" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">G2 · 给可及面</text>
+  <text class="f" x="599" y="236" text-anchor="middle" fill="#ffedd5" font-size="13">改文件 · 跑命令 · 调服务</text>
+  <text class="f" x="599" y="264" text-anchor="middle" fill="#fed7aa" font-size="12">验收：diff、测试、日志</text>
+  <text class="f" x="599" y="292" text-anchor="middle" fill="#ffedd5" font-size="11">真变好看这里</text>
+
+  <rect x="800" y="160" width="352" height="160" rx="14" fill="#fff" stroke="#0f766e" stroke-width="2.5"/>
+  <rect x="800" y="160" width="352" height="44" rx="14" fill="#0f766e"/>
+  <text class="f" x="976" y="188" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">G3 · 可回滚</text>
+  <text class="f" x="976" y="236" text-anchor="middle" fill="#115e59" font-size="13">Checkpoint 覆盖的文件编辑</text>
+  <text class="f" x="976" y="264" text-anchor="middle" fill="#78716c" font-size="12">验收：/rewind、对照快照</text>
+  <text class="f" x="976" y="292" text-anchor="middle" fill="#a8a29e" font-size="11">不管远端副作用</text>
+
+  <!-- first knife -->
+  <text class="f" x="600" y="360" text-anchor="middle" fill="#57534e" font-size="13" font-weight="700">第一刀顺序（官方 Extend 落到手上）</text>
+
+  <rect x="48" y="380" width="170" height="72" rx="10" fill="#ea580c"/>
+  <text class="f" x="133" y="410" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">1. CLAUDE.md</text>
+  <text class="f" x="133" y="432" text-anchor="middle" fill="#ffedd5" font-size="11">短 · 永远要/不要</text>
+
+  <line x1="218" y1="416" x2="238" y2="416" stroke="#44403c" stroke-width="2" marker-end="url(#arr)"/>
+
+  <rect x="246" y="380" width="170" height="72" rx="10" fill="#f97316"/>
+  <text class="f" x="331" y="410" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">2. 权限 / deny</text>
+  <text class="f" x="331" y="432" text-anchor="middle" fill="#ffedd5" font-size="11">先挡不可逆</text>
+
+  <line x1="416" y1="416" x2="436" y2="416" stroke="#44403c" stroke-width="2" marker-end="url(#arr)"/>
+
+  <rect x="444" y="380" width="170" height="72" rx="10" fill="#fb923c"/>
+  <text class="f" x="529" y="410" text-anchor="middle" fill="#1c1917" font-size="13" font-weight="700">3. 一个 Skill</text>
+  <text class="f" x="529" y="432" text-anchor="middle" fill="#7c2d12" font-size="11">第三遍就 /name</text>
+
+  <line x1="614" y1="416" x2="634" y2="416" stroke="#44403c" stroke-width="2" marker-end="url(#arr)"/>
+
+  <rect x="642" y="380" width="170" height="72" rx="10" fill="#fdba74"/>
+  <text class="f" x="727" y="410" text-anchor="middle" fill="#1c1917" font-size="13" font-weight="700">4. 一个 Hook</text>
+  <text class="f" x="727" y="432" text-anchor="middle" fill="#7c2d12" font-size="11">必须每次发生</text>
+
+  <line x1="812" y1="416" x2="832" y2="416" stroke="#44403c" stroke-width="2" marker-end="url(#arr)"/>
+
+  <rect x="840" y="380" width="150" height="72" rx="10" fill="#fed7aa"/>
+  <text class="f" x="915" y="410" text-anchor="middle" fill="#1c1917" font-size="13" font-weight="700">5. MCP</text>
+  <text class="f" x="915" y="432" text-anchor="middle" fill="#7c2d12" font-size="11">真数据瓶颈</text>
+
+  <line x1="990" y1="416" x2="1010" y2="416" stroke="#44403c" stroke-width="2" marker-end="url(#arr)"/>
+
+  <rect x="1018" y="380" width="134" height="72" rx="10" fill="#e7e5e4"/>
+  <text class="f" x="1085" y="410" text-anchor="middle" fill="#44403c" font-size="13" font-weight="700">6. Plugin</text>
+  <text class="f" x="1085" y="432" text-anchor="middle" fill="#78716c" font-size="11">多仓复用</text>
+
+  <rect x="48" y="480" width="1104" height="120" rx="14" fill="#fff" stroke="#d6d3d1" stroke-width="1.5"/>
+  <text class="f" x="72" y="516" fill="#1c1917" font-size="14" font-weight="700">验收：至少做两件</text>
+  <text class="f" x="72" y="548" fill="#44403c" font-size="13">① 新开 Session（避免「聊天里刚说过」的假成功）　② 看 G2：diff / 测试是否真变好</text>
+  <text class="f" x="72" y="576" fill="#44403c" font-size="13">③ 看 Gate：该拦的仍拦、该自动的仍自动　·　只有 G1 更会说话、G2 没变 → 多半只写进了 Context</text>
+</svg>
