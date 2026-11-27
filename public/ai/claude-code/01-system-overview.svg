@@ -1,0 +1,212 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1280" role="img" aria-labelledby="title desc">
+  <title id="title">Claude Code 系统架构</title>
+  <desc id="desc">控制面、运行面、模型、可及面与输出的系统架构</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 z" fill="#1c1917"/>
+    </marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 z" fill="#047857"/>
+    </marker>
+    <style>
+      .f{font-family:ui-sans-serif,system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+    </style>
+  </defs>
+
+  <rect width="1080" height="1280" fill="#f7f6f3"/>
+  <text class="f" x="540" y="28" text-anchor="middle" fill="#1c1917" font-size="16" font-weight="700">Claude Code 系统架构</text>
+  <text class="f" x="540" y="48" text-anchor="middle" fill="#57534e" font-size="11">依据 code.claude.com · How Claude Code works / Glossary / Settings</text>
+
+  <!-- USER -->
+  <rect x="390" y="64" width="300" height="48" rx="24" fill="#0f766e" stroke="#134e4a" stroke-width="2"/>
+  <text class="f" x="540" y="84" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Actor · 你</text>
+  <text class="f" x="540" y="102" text-anchor="middle" fill="#ccfbf1" font-size="11">提问 · 打断 · 改向 · 验收 · 授权</text>
+  <line x1="540" y1="112" x2="540" y2="132" stroke="#1c1917" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- INTERFACES -->
+  <rect x="40" y="136" width="1000" height="72" rx="12" fill="#dbeafe" stroke="#1d4ed8" stroke-width="3"/>
+  <rect x="40" y="136" width="10" height="72" fill="#1d4ed8"/>
+  <text class="f" x="64" y="160" fill="#1e3a8a" font-size="14" font-weight="700">A · Interfaces / Surface · 交互表面</text>
+  <text class="f" x="64" y="178" fill="#1e40af" font-size="11">你如何接入同一引擎（不是代码落点）</text>
+  <rect x="64" y="186" width="952" height="14" rx="4" fill="#2563eb"/>
+  <text class="f" x="540" y="197" text-anchor="middle" fill="#eff6ff" font-size="10" font-weight="600">Terminal · IDE · Desktop · Web · CI/CD · Remote Control UI</text>
+
+  <!-- split note -->
+  <line x1="300" y1="208" x2="300" y2="236" stroke="#1c1917" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="780" y1="208" x2="780" y2="236" stroke="#1c1917" stroke-width="2" marker-end="url(#a)"/>
+  <text class="f" x="540" y="228" text-anchor="middle" fill="#78716c" font-size="10">下方 B / C 正交：左=代码跑哪，右=策略从哪来 · 不是上下一跳</text>
+
+  <!-- B EXEC ENV -->
+  <rect x="40" y="244" width="480" height="118" rx="12" fill="#ede9fe" stroke="#6d28d9" stroke-width="3"/>
+  <rect x="40" y="244" width="10" height="118" fill="#6d28d9"/>
+  <text class="f" x="64" y="268" fill="#4c1d95" font-size="13" font-weight="700">B · Execution environments · 执行环境</text>
+  <text class="f" x="64" y="286" fill="#5b21b6" font-size="10">代码与工具实际执行的位置</text>
+  <rect x="64" y="298" width="130" height="44" rx="8" fill="#7c3aed"/>
+  <text class="f" x="129" y="316" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Local</text>
+  <text class="f" x="129" y="332" text-anchor="middle" fill="#ede9fe" font-size="9">本机默认</text>
+  <rect x="208" y="298" width="130" height="44" rx="8" fill="#8b5cf6"/>
+  <text class="f" x="273" y="316" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Cloud</text>
+  <text class="f" x="273" y="332" text-anchor="middle" fill="#f5f3ff" font-size="9">托管/自建 VM</text>
+  <rect x="352" y="298" width="148" height="44" rx="8" fill="#a78bfa"/>
+  <text class="f" x="426" y="316" text-anchor="middle" fill="#1e1b4b" font-size="11" font-weight="700">Remote Control</text>
+  <text class="f" x="426" y="332" text-anchor="middle" fill="#4c1d95" font-size="9">UI 远端 · 执行仍本地</text>
+
+  <!-- C SETTINGS -->
+  <rect x="560" y="244" width="480" height="118" rx="12" fill="#ecfdf5" stroke="#047857" stroke-width="3"/>
+  <rect x="560" y="244" width="10" height="118" fill="#047857"/>
+  <text class="f" x="584" y="268" fill="#064e3b" font-size="13" font-weight="700">C · Settings / Policy · 配置与策略面</text>
+  <text class="f" x="584" y="286" fill="#065f46" font-size="10">优先级高→低（同 key 高覆盖低）</text>
+  <rect x="584" y="298" width="84" height="48" rx="6" fill="#047857"/>
+  <text class="f" x="626" y="318" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">1 Managed</text>
+  <text class="f" x="626" y="334" text-anchor="middle" fill="#d1fae5" font-size="8">组织强制</text>
+  <rect x="676" y="298" width="78" height="48" rx="6" fill="#059669"/>
+  <text class="f" x="715" y="318" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">2 CLI</text>
+  <text class="f" x="715" y="334" text-anchor="middle" fill="#d1fae5" font-size="8">--settings</text>
+  <rect x="762" y="298" width="78" height="48" rx="6" fill="#10b981"/>
+  <text class="f" x="801" y="318" text-anchor="middle" fill="#064e3b" font-size="10" font-weight="700">3 Local</text>
+  <text class="f" x="801" y="334" text-anchor="middle" fill="#065f46" font-size="8">settings.local</text>
+  <rect x="848" y="298" width="78" height="48" rx="6" fill="#34d399"/>
+  <text class="f" x="887" y="318" text-anchor="middle" fill="#064e3b" font-size="10" font-weight="700">4 Project</text>
+  <text class="f" x="887" y="334" text-anchor="middle" fill="#065f46" font-size="8">settings.json</text>
+  <rect x="934" y="298" width="86" height="48" rx="6" fill="#6ee7b7"/>
+  <text class="f" x="977" y="318" text-anchor="middle" fill="#064e3b" font-size="10" font-weight="700">5 User</text>
+  <text class="f" x="977" y="334" text-anchor="middle" fill="#065f46" font-size="8">~/.claude</text>
+
+  <!-- into harness -->
+  <line x1="280" y1="362" x2="400" y2="392" stroke="#1c1917" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="800" y1="362" x2="680" y2="392" stroke="#1c1917" stroke-width="2" marker-end="url(#a)"/>
+  <text class="f" x="540" y="384" text-anchor="middle" fill="#78716c" font-size="10">共同约束 / 塑造下方 Session</text>
+
+  <!-- D HARNESS -->
+  <rect x="40" y="396" width="1000" height="420" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="3.5"/>
+  <rect x="40" y="396" width="10" height="420" fill="#ea580c"/>
+  <text class="f" x="64" y="422" fill="#9a3412" font-size="15" font-weight="700">D · Claude Code = Agentic Harness · Session 运行实例</text>
+  <text class="f" x="64" y="440" fill="#c2410c" font-size="11">产品本体：tools + context management + execution wiring + permission gating + loop。一次对话 = 一个 Session（transcript 可 resume / fork）</text>
+
+  <!-- D1 Context -->
+  <rect x="60" y="456" width="310" height="118" rx="10" fill="#e0e7ff" stroke="#3730a3" stroke-width="2.5"/>
+  <text class="f" x="215" y="480" text-anchor="middle" fill="#312e81" font-size="13" font-weight="700">D1 Context · 上下文面</text>
+  <text class="f" x="76" y="502" fill="#4338ca" font-size="10">• system prompt / system reminders</text>
+  <text class="f" x="76" y="518" fill="#4338ca" font-size="10">• CLAUDE.md / AGENTS.md / rules</text>
+  <text class="f" x="76" y="534" fill="#4338ca" font-size="10">• 会话历史 · auto memory · 已加载 Skills</text>
+  <text class="f" x="76" y="550" fill="#4338ca" font-size="10">• Compaction：窗口将满时摘要压缩</text>
+  <text class="f" x="76" y="566" fill="#312e81" font-size="9" font-weight="600">持久规则放 CLAUDE.md，才扛得住 compact</text>
+
+  <!-- D2 Tools -->
+  <rect x="386" y="456" width="310" height="118" rx="10" fill="#fce7f3" stroke="#be185d" stroke-width="2.5"/>
+  <text class="f" x="541" y="480" text-anchor="middle" fill="#9d174d" font-size="13" font-weight="700">D2 Tools · 行动能力</text>
+  <text class="f" x="402" y="502" fill="#be185d" font-size="10">内建五类：文件 · 搜索 · Shell · Web · 代码智能</text>
+  <text class="f" x="402" y="518" fill="#be185d" font-size="10">编排：提问你 · 派 Subagent · …</text>
+  <text class="f" x="402" y="534" fill="#be185d" font-size="10">无 Tools → 只能吐文本（非 agentic）</text>
+  <text class="f" x="402" y="550" fill="#be185d" font-size="10">MCP 等把外部能力挂进工具表</text>
+  <text class="f" x="402" y="566" fill="#9d174d" font-size="9" font-weight="600">工具结果回灌 Loop，驱动下一步</text>
+
+  <!-- D3 Gate -->
+  <rect x="712" y="456" width="310" height="118" rx="10" fill="#fef08a" stroke="#a16207" stroke-width="2.5"/>
+  <text class="f" x="867" y="480" text-anchor="middle" fill="#713f12" font-size="13" font-weight="700">D3 Gate · 信任与安全面</text>
+  <text class="f" x="728" y="502" fill="#854d0e" font-size="10">• Permission mode + allow/ask/deny 规则</text>
+  <text class="f" x="728" y="518" fill="#854d0e" font-size="10">• Checkpoint：改文件前快照 / rewind</text>
+  <text class="f" x="728" y="534" fill="#854d0e" font-size="10">• Sandbox：Bash 的 OS 级文件/网络隔离</text>
+  <text class="f" x="728" y="550" fill="#854d0e" font-size="10">• Project trust：加载项目配置前确认</text>
+  <text class="f" x="728" y="566" fill="#713f12" font-size="9" font-weight="600">远端副作用不可 checkpoint，靠权限拦</text>
+
+  <!-- arrows to loop -->
+  <line x1="215" y1="574" x2="400" y2="604" stroke="#1c1917" stroke-width="1.8" marker-end="url(#a)"/>
+  <line x1="541" y1="574" x2="540" y2="604" stroke="#1c1917" stroke-width="1.8" marker-end="url(#a)"/>
+  <line x1="867" y1="574" x2="680" y2="604" stroke="#1c1917" stroke-width="1.8" marker-end="url(#a)"/>
+
+  <!-- D4 Loop -->
+  <rect x="200" y="608" width="520" height="70" rx="12" fill="#ea580c" stroke="#9a3412" stroke-width="2.5"/>
+  <text class="f" x="460" y="636" text-anchor="middle" fill="#fff7ed" font-size="15" font-weight="700">D4 Agentic Loop · 控制主环</text>
+  <text class="f" x="460" y="658" text-anchor="middle" fill="#ffedd5" font-size="12">gather context → take action → verify results → 再来 · 人可随时打断改向</text>
+
+  <!-- D5 Extensions -->
+  <rect x="740" y="608" width="282" height="70" rx="12" fill="#fae8ff" stroke="#a21caf" stroke-width="2.5" stroke-dasharray="7 4"/>
+  <text class="f" x="881" y="634" text-anchor="middle" fill="#86198f" font-size="12" font-weight="700">D5 Extensions · 扩展面</text>
+  <text class="f" x="881" y="652" text-anchor="middle" fill="#a21caf" font-size="10">Skills · MCP · Hooks · Subagents</text>
+  <text class="f" x="881" y="668" text-anchor="middle" fill="#a21caf" font-size="10">Plugins = 上述能力的打包分发</text>
+  <text class="f" x="730" y="644" text-anchor="end" fill="#a21caf" font-size="10">叠上</text>
+  <line x1="740" y1="643" x2="720" y2="643" stroke="#a21caf" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#a)"/>
+
+  <!-- harness notes -->
+  <text class="f" x="64" y="708" fill="#9a3412" font-size="11">CLI 与 Agent SDK 共享同一套 Loop；SDK 消息类型是观测/嵌入接口，不是额外架构层</text>
+  <text class="f" x="64" y="726" fill="#9a3412" font-size="11">Bare mode（--bare）可关掉 Hooks/Skills/MCP/memory/CLAUDE.md 等，便于 CI 最小面</text>
+
+  <!-- Agent teams side -->
+  <rect x="60" y="740" width="960" height="54" rx="10" fill="#fff" stroke="#78716c" stroke-width="2" stroke-dasharray="6 4"/>
+  <text class="f" x="80" y="762" fill="#44403c" font-size="12" font-weight="700">D6 Agent teams（experimental · 旁路）</text>
+  <text class="f" x="80" y="780" fill="#57534e" font-size="10">多独立 Session + 共享任务板 + 互发消息 · 默认关闭 · 不同于同 Session 内的 Subagents</text>
+
+  <!-- E Model / F Access -->
+  <line x1="280" y1="816" x2="220" y2="844" stroke="#1c1917" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="700" y1="816" x2="780" y2="844" stroke="#1c1917" stroke-width="2" marker-end="url(#a)"/>
+  <text class="f" x="230" y="836" fill="#44403c" font-size="10" font-weight="600">推理</text>
+  <text class="f" x="720" y="836" fill="#44403c" font-size="10" font-weight="600">行动</text>
+
+  <rect x="40" y="848" width="460" height="100" rx="12" fill="#d1fae5" stroke="#047857" stroke-width="3"/>
+  <rect x="40" y="848" width="10" height="100" fill="#047857"/>
+  <text class="f" x="64" y="876" fill="#064e3b" font-size="14" font-weight="700">E · Model · Claude</text>
+  <text class="f" x="64" y="896" fill="#065f46" font-size="11">推理引擎：理解 · 规划 · 选工具 · 判完成</text>
+  <text class="f" x="64" y="914" fill="#047857" font-size="11">「Claude chooses / decides」= 模型在决策</text>
+  <text class="f" x="64" y="932" fill="#064e3b" font-size="10" font-weight="600">不是产品本体；可换模型，Harness 仍在</text>
+
+  <rect x="540" y="848" width="500" height="100" rx="12" fill="#e2e8f0" stroke="#0f172a" stroke-width="3"/>
+  <rect x="540" y="848" width="10" height="100" fill="#0f172a"/>
+  <text class="f" x="564" y="876" fill="#0f172a" font-size="14" font-weight="700">F · Access · 可及面</text>
+  <text class="f" x="564" y="896" fill="#334155" font-size="11">Tools 作用对象（≠ B 执行环境）</text>
+  <rect x="564" y="908" width="100" height="26" rx="6" fill="#334155"/>
+  <text class="f" x="614" y="925" text-anchor="middle" fill="#f8fafc" font-size="10" font-weight="600">项目 · Git</text>
+  <rect x="676" y="908" width="100" height="26" rx="6" fill="#334155"/>
+  <text class="f" x="726" y="925" text-anchor="middle" fill="#f8fafc" font-size="10" font-weight="600">Shell</text>
+  <rect x="788" y="908" width="110" height="26" rx="6" fill="#334155"/>
+  <text class="f" x="843" y="925" text-anchor="middle" fill="#f8fafc" font-size="10" font-weight="600">外部服务</text>
+  <rect x="910" y="908" width="110" height="26" rx="6" fill="#334155"/>
+  <text class="f" x="965" y="925" text-anchor="middle" fill="#f8fafc" font-size="10" font-weight="600">浏览器等</text>
+
+  <!-- feedback clean -->
+  <path d="M 160 848 L 160 820 L 280 820" fill="none" stroke="#047857" stroke-width="2" marker-end="url(#ag)"/>
+  <text class="f" x="90" y="816" fill="#047857" font-size="10" font-weight="600">tool calls</text>
+  <path d="M 900 948 L 900 820 L 700 820" fill="none" stroke="#047857" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ag)"/>
+  <text class="f" x="910" y="816" fill="#047857" font-size="10" font-weight="600">结果回灌 Loop</text>
+
+  <!-- G Output：从 Harness/Loop 产出，经可及面副作用后汇到输出面 -->
+  <path d="M 40 794 L 24 794 L 24 1000 L 40 1000" fill="none" stroke="#9d174d" stroke-width="2.2" marker-end="url(#a)"/>
+  <text class="f" x="8" y="900" fill="#9d174d" font-size="10" font-weight="700" transform="rotate(-90 8 900)">Loop 产出</text>
+
+  <rect x="40" y="984" width="1000" height="130" rx="12" fill="#fce7f3" stroke="#9d174d" stroke-width="3"/>
+  <rect x="40" y="984" width="10" height="130" fill="#9d174d"/>
+  <text class="f" x="64" y="1010" fill="#831843" font-size="14" font-weight="700">G · Output · 输出面（三路）</text>
+  <text class="f" x="64" y="1028" fill="#9d174d" font-size="10">机制在 D3 Gate；这里只画产出形态</text>
+
+  <rect x="64" y="1040" width="300" height="54" rx="10" fill="#0f766e"/>
+  <text class="f" x="214" y="1062" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">G1 → 你</text>
+  <text class="f" x="214" y="1080" text-anchor="middle" fill="#ccfbf1" font-size="10">文本 · 提问 · 计划 · 摘要</text>
+
+  <rect x="384" y="1040" width="300" height="54" rx="10" fill="#0f172a"/>
+  <text class="f" x="534" y="1062" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">G2 → 可及面</text>
+  <text class="f" x="534" y="1080" text-anchor="middle" fill="#cbd5e1" font-size="10">改文件 · 跑命令 · 调服务</text>
+
+  <rect x="704" y="1040" width="312" height="54" rx="10" fill="#a16207"/>
+  <text class="f" x="860" y="1062" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">G3 可回滚形态</text>
+  <text class="f" x="860" y="1080" text-anchor="middle" fill="#fef3c7" font-size="10">Checkpoint 覆盖的文件编辑（非远端副作用）</text>
+
+  <!-- legend -->
+  <text class="f" x="40" y="1150" fill="#1c1917" font-size="12" font-weight="700">图例</text>
+  <rect x="40" y="1160" width="12" height="12" rx="2" fill="#0f766e"/><text class="f" x="58" y="1170" fill="#44403c" font-size="10">Actor/G1</text>
+  <rect x="130" y="1160" width="12" height="12" rx="2" fill="#2563eb"/><text class="f" x="148" y="1170" fill="#44403c" font-size="10">A Interfaces</text>
+  <rect x="250" y="1160" width="12" height="12" rx="2" fill="#7c3aed"/><text class="f" x="268" y="1170" fill="#44403c" font-size="10">B Exec env</text>
+  <rect x="360" y="1160" width="12" height="12" rx="2" fill="#047857"/><text class="f" x="378" y="1170" fill="#44403c" font-size="10">C Settings</text>
+  <rect x="470" y="1160" width="12" height="12" rx="2" fill="#ea580c"/><text class="f" x="488" y="1170" fill="#44403c" font-size="10">D Harness/Loop</text>
+  <rect x="620" y="1160" width="12" height="12" rx="2" fill="#e0e7ff" stroke="#3730a3"/><text class="f" x="638" y="1170" fill="#44403c" font-size="10">D1 Context</text>
+  <rect x="740" y="1160" width="12" height="12" rx="2" fill="#fce7f3" stroke="#be185d"/><text class="f" x="758" y="1170" fill="#44403c" font-size="10">D2 Tools</text>
+  <rect x="850" y="1160" width="12" height="12" rx="2" fill="#fef08a" stroke="#a16207"/><text class="f" x="868" y="1170" fill="#44403c" font-size="10">D3 Gate</text>
+
+  <rect x="40" y="1188" width="12" height="12" rx="2" fill="#fae8ff" stroke="#a21caf"/><text class="f" x="58" y="1198" fill="#44403c" font-size="10">D5 Ext</text>
+  <rect x="130" y="1188" width="12" height="12" rx="2" fill="#fff" stroke="#78716c"/><text class="f" x="148" y="1198" fill="#44403c" font-size="10">D6 Teams</text>
+  <rect x="250" y="1188" width="12" height="12" rx="2" fill="#d1fae5" stroke="#047857"/><text class="f" x="268" y="1198" fill="#44403c" font-size="10">E Model</text>
+  <rect x="360" y="1188" width="12" height="12" rx="2" fill="#334155"/><text class="f" x="378" y="1198" fill="#44403c" font-size="10">F Access</text>
+  <rect x="470" y="1188" width="12" height="12" rx="2" fill="#fce7f3" stroke="#9d174d"/><text class="f" x="488" y="1198" fill="#44403c" font-size="10">G Output</text>
+  <text class="f" x="620" y="1198" fill="#78716c" font-size="10">实线=主路径 · 虚线=扩展叠层 / 回灌 / experimental</text>
+
+  <text class="f" x="540" y="1248" text-anchor="middle" fill="#78716c" font-size="11">后续文章按面展开：02 落盘与 Settings · 03 Loop · 04 能力/扩展 · 05 咬合 · 06 改动入口</text>
+</svg>

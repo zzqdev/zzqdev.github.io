@@ -1,159 +1,172 @@
 ---
-title: 01 系统全貌：Agentic Harness
-description: 全局——Claude Code 是什么、边界在哪、后面顺着什么读
+title: 01 分层架构：输入到输出
+description: 按分层图读 Claude Code：输入、Harness、扩展时机、模型与输出
 ---
 
-没有完整源码时，读 Claude Code 最稳的入口不是命令清单，而是官方自己给出的那层定义：  
-**Claude 是模型；Claude Code 是包在模型外面的 agentic harness。**
+没有完整源码时，把官方文档当成架构说明书来读。  
+材料：[How Claude Code works](https://code.claude.com/docs/en/how-claude-code-works)、[Extend](https://code.claude.com/docs/en/features-overview)、[Glossary](https://code.claude.com/docs/en/glossary)、[Settings](https://code.claude.com/docs/en/settings)。
 
-本篇只建立全局判断。材料主要来自 [How Claude Code works](https://code.claude.com/docs/en/how-claude-code-works) 与 [Glossary](https://code.claude.com/docs/en/glossary)。
+本篇以一张分层图为轴：**输入 → 接入 → Agentic Harness → 模型 / 可及面 → 输出**。落盘细节、能力清单、改动入口留给后续篇。
 
-## 章节目录
-
-1. 这一篇要回答什么
-2. 一句话定位：是什么 / 不是什么
-3. 两层结构：Model 推理，Harness 提供行动与约束
-4. 主循环预告：gather → act → verify
-5. 它能碰到什么：项目、终端、会话记忆
-6. 同一引擎，多种表面
-7. 安全面预告：权限与 checkpoint
-8. 全貌阶段的完成标准
-9. 下一步：落盘地图
+![Claude Code 分层架构：输入、输出与扩展时机](/ai/claude-code/01-architecture-io.svg)
 
 ---
 
-## 1. 这一篇要回答什么
+## 1. 先看整张图在说什么
 
-后面几篇会进目录、拆主循环、拆能力零件。本篇只做一件事：  
-**先把「系统骨架」钉住，再进细节。**
+产品本体不是「某个 Claude 模型」，而是包在模型外面的运行时——官方叫 **agentic coding harness**。
 
-读完应能回答：
+- **模型**负责推理：读上下文、决定下一步、生成文本或 tool call  
+- **Harness**负责接线：喂上下文、执行工具、做门控、驱动主环、把结果回灌  
 
-- Claude Code 和「对话框里的 Claude」差在哪一层
-- 官方说的 agentic harness 具体管什么
-- 一次任务大致怎么转，扩展点大概挂在哪
-- 自动化真实边界大概在哪，期望该压到什么水平
+无 Tools 则无 agentic，只剩聊天。壳可以是 Terminal / IDE / Desktop / Web / CI，**底下是同一套环**。一次运行 ≈ 一个 **Session**（可 resume / fork）。
 
-没有这张图，容易把它当成「更强的补全」或「无人工程师」，后面读配置和扩展都会偏。
+图从上到下五层（L0–L4）；L2 里还有一条 **扩展挂载**，标了各扩展 **何时调用**。
 
 ---
 
-## 2. 一句话定位：是什么 / 不是什么
+## 2. L0 · 输入
 
-**是什么：** 跑在终端（以及 IDE / Desktop / Web 等表面）里的 **agentic coding harness**。它给模型接上工具、管上下文、管执行环境与权限，让模型能在仓库里读改跑、多步纠偏。
+进 Session 的材料与约束，不是「代码跑在哪」：
 
-**不是什么：**
+- 任务 / 提问（含你中途打断、改向）  
+- **CLAUDE.md**、rules、Settings  
+- 会话历史 / memory、授权与 trust  
+- Skills 的定义（先存在，用不用另说）  
+- Output style 等会话级偏好  
 
-| 常见误解 | 更准确的说法 |
+Settings 同 key 时大致：Managed → CLI `--settings` → 项目 local → 项目 → 用户。路径怎么叠见 [02](/ai/claude-code/02-layout/)。
+
+---
+
+## 3. L1 · 接入
+
+Terminal、IDE、Desktop、Web、CI/CD、Remote Control UI……  
+**壳可变，Loop 不变。** 换客户端不等于换引擎。
+
+---
+
+## 4. L2 · Agentic Harness
+
+这一层是产品本体。可以拆成三块看：主环、内核零件、扩展挂载。
+
+### 4.1 主环：gather → act → verify
+
+官方把循环收成三步：
+
+1. **gather** — 弄清要做什么（读文件、搜代码、问你、加载说明）  
+2. **act** — 动手（改文件、跑测试、调服务）  
+3. **verify** — 检查结果（看输出、再读代码、必要时回退或继续）
+
+实现向（Agent SDK 同一套 loop）：
+
+```
+收 prompt
+  → 模型输出（文本和/或 tool calls）
+  → 运行时执行工具
+  → 结果回灌 Context
+  → 再调模型……
+直到不再要工具（或你打断 / 触顶）
+```
+
+人可以随时插入；长任务会 Compaction；verify 不过就再转一圈——失败是常态路径。turn 级细节见 [03](/ai/claude-code/03-loop/)。
+
+### 4.2 内核零件
+
+| 零件 | 管什么 |
 | --- | --- |
-| 又一个聊天机器人 | 无工具时只能吐文字；有工具才 agentic |
-| IDE 行内补全 | 补全偏局部文件；它偏整条任务链路 |
-| 等于 Claude 模型本身 | 模型负责推理；Claude Code 是外围那层 |
-| 开源可通读的产品源码 | 公开仓主要是 changelog / plugins / 示例；产品本体闭源 |
-| 无人值守全自动工程师 | 人可以打断、改向、验收；权限与检查点仍是设计前提 |
+| **Context** | 组装每轮模型所见；窗口满了会压缩 |
+| **Gate** | Permission、Sandbox、Checkpoint——行动前拦、编辑前快照 |
+| **Tools** | 把意图变成动作：内建读改搜跑 + MCP 工具表 |
+| **Orchestration** | Subagents、Dynamic workflow——任务怎么拆、隔离怎么跑 |
+| **执行落点** | Local / Cloud / Remote Control——与策略面正交，问「跑在哪」 |
 
-一句话收束：**Claude Code = 把 Claude 变成「能在你环境里行动的编码 Agent」的那层 harness，而不是模型商标换皮。**
+虚线 **工具结果回灌 Context**：没有回灌，主环转不下去。
+
+### 4.3 扩展挂载 · 何时调用
+
+扩展叠在 Loop 上，**不是另起一个引擎**。日常定制最常摸这几块：
+
+| 扩展 | 挂在哪 | 何时调用 |
+| --- | --- | --- |
+| **CLAUDE.md** / **rules** | → Context | **Session 启动自动加载**（「永远知道」的约定） |
+| **Skills** | → Context | **你打 `/name`**，或模型判定相关时按需加载 |
+| **MCP** | → Tools 表 | **模型发出 tool call** 时调外部服务/数据 |
+| **Hooks** | → 生命周期 / Gate | **固定事件必触发**（SessionStart、Pre/PostToolUse…），不靠模型「想起来」 |
+| **Subagents** | → Orchestration | **主 Agent 委托**隔离任务；独立 loop，摘要回主会话 |
+| **Output style** | → 指令面 | **整段 Session 生效**；语气 / 角色 / 回复格式 |
+| **Plugins** | 打包单元 | **安装后**把 Skills / Hooks / MCP / Subagents 一起带上 |
+| **Code intelligence** | → Tools | **跳转定义 / 读诊断** 等需要时（LSP 类） |
+
+此外还有，图上不逐格展开：
+
+- **Auto memory**：会话中写入；下次启动加载索引  
+- **Dynamic workflow**：模型写脚本拉起一批 subagent  
+- **Agent teams**（experimental）：多 Session 协作 ≠ 同 Session 内 Subagents  
+- **Artifacts / Channels**：产出可视化页面、外部事件推进会话等  
+
+`--bare` 可关掉多数扩展与项目说明，适合 CI 最小面。
+
+用法与咬合见 [04](/ai/claude-code/04-capabilities/)、[05](/ai/claude-code/05-wiring/)、[06](/ai/claude-code/06-extend/)；本篇只钉位置和时机。
 
 ---
 
-## 3. 两层结构：Model 推理，Harness 提供行动与约束
+## 5. L3 · 模型与可及面
 
-官方把动力拆成两块：
+**L3a Model**  
+推理引擎（可换）。读 Context，输出文本和/或 tool calls。文档写「Claude chooses / decides」时，多半指这里。  
+**何时用 Skill / MCP / Subagent，多半由模型在环里决定**；**Hooks 除外**——Hooks 是事件驱动，确定性触发。
 
-1. **Models**  
-   读代码、拆步骤、决定下一步、根据工具结果改道。文档里写「Claude chooses / decides」时，指的是模型在推理。
+**L3b Access**  
+Tools（含 MCP）实际能碰什么：项目 / Git、Shell、外部服务、浏览器、LSP 等。
 
-2. **Tools + context management + execution environment**  
-   这才是 harness：文件与搜索、Shell、Web、代码智能、子代理编排；以及把哪些东西塞进上下文、在什么环境执行、什么动作要过权限。
+口语里的「环境」常把三件事糊在一起，图上要拆开：
 
-没有工具，模型只能回复文本。  
-有了工具，每次工具结果回流进循环，下一步才有依据——这就是 agentic 的技术含义。
-
-扩展面（Skills、MCP、Hooks、Subagents）不另起炉灶，而是 **叠在这条主循环之上**。后面「能力面」「咬合」两篇会分别拆零件和接线。
-
----
-
-## 4. 主循环预告：gather → act → verify
-
-官方把每轮工作概括成三个会交织的阶段：
-
-| 阶段 | 在干什么 |
+| 说法 | 实际指 |
 | --- | --- |
-| Gather context | 搜文件、读代码、看报错、拉外部信息 |
-| Take action | 改文件、跑命令、调 MCP、派 subagent |
-| Verify results | 再跑测试 / 构建 / 对照目标，不对就继续循环 |
-
-任务不同，环的形态不同：只问结构可能停在 gather；修 bug 会反复三阶段；重构往往在 verify 上花很久。  
-人也在环里：随时 `Esc` 打断，或塞一句纠正让它改道——不是点火后只能旁观。
-
-Agent SDK 文档把同一套循环写得更「实现向」：收 prompt → 模型输出（文本和/或 tool calls）→ 运行时执行工具 → 结果回灌 → 直到不再要工具。  
-**CLI 与 SDK 共享这套 loop**；读 SDK 的 agent loop，相当于读「核心运行时」的公开说明书。
-
-本篇只记骨架；具体 turn、消息类型、何时结束，留给 [03 主循环](/ai/claude-code/03-loop/)。
+| 「在 IDE 里用」 | L1 接入 |
+| 「跑在本地还是云上」 | L2 旁的执行落点 |
+| 「它能改我仓库吗」 | L3b 可及面 + Gate 是否放行 |
 
 ---
 
-## 5. 它能碰到什么：项目、终端、会话记忆
+## 6. L4 · 输出
 
-在某目录启动后，官方写明 harness 默认可及：
+Loop 的产出分三路：
 
-- **项目树**：当前目录及子目录；别处文件通常要你的许可
-- **终端能力**：你能在 shell 里做的事，它原则上也能做（构建、git、包管理……）
-- **Git 状态**：分支、未提交改动、近期历史
-- **CLAUDE.md / AGENTS.md**：你写的持久项目说明
-- **Auto memory**：它自己记的偏好与纠正（有体积上限，会话开始加载一部分）
-- **你接上的扩展**：MCP、Skills、Subagents、浏览器相关能力等
-
-和「只看见当前打开文件」的行内助手比，差别在：**上下文默认是仓库级的**，所以才能跨文件协调修改再验证。
-
-会话本身也是系统的一部分：对话与工具轨迹会落成可恢复的 transcript；改文件前可做 checkpoint。细节进 [02 落盘地图](/ai/claude-code/02-layout/)。
-
----
-
-## 6. 同一引擎，多种表面
-
-| 维度 | 要点 |
+| | 去向 |
 | --- | --- |
-| 执行环境 | Local（默认，在你机器上）、Cloud（托管或自建环境）、Remote Control（文件仍在本地，界面可在别处） |
-| 交互表面 | 终端、Desktop、IDE 扩展、claude.ai/code、CI 等 |
+| **G1** | 给你：解释、提问、计划、摘要 |
+| **G2** | 给可及面：改文件、跑命令、调服务 |
+| **G3** | 可回滚形态：Checkpoint 覆盖的文件编辑 |
 
-官方强调：**表面变的是「你怎么看、怎么点」；底下的 agentic loop 同一套。**  
-项目里的 CLAUDE.md、settings、MCP，在共享引擎的前提下跨表面复用——读系统时，应盯引擎与配置面，而不是某个 UI 皮肤。
-
----
-
-## 7. 安全面预告：权限与 checkpoint
-
-Harness 不是「模型想干什么就干什么」，至少有两道官方写明的安全机制：
-
-1. **Permissions**  
-   权限模式决定「不问你也能做多少」：Manual、Accept edits、Plan、Auto（分类器挡风险）等。细规则可写在 settings 里 allow / ask / deny。
-
-2. **Checkpoints**  
-   改文件前快照，便于 rewind；管的是文件编辑，不管远端系统副作用（DB、部署、不可逆 API）。那些仍要靠权限与你的验收。
-
-再往外还有 sandbox、project trust、managed settings 等企业向控制。全貌阶段只需记住：  
-**约束与可回滚，是 harness 的一等公民，不是附加插件。**
+**机制在 Gate；G3 只描述形态**——别把 Checkpoint 理解成另一套引擎。远端副作用（已 push 的 PR、已发出的请求）通常不在 checkpoint 里。
 
 ---
 
-## 8. 全貌阶段的完成标准
+## 7. 几个容易混的词
 
-不必背文档。能用自己的话讲清下面几条，全貌就算过关：
-
-1. Claude Code 是 agentic harness，不是模型本身，也不是行内补全。
-2. 动力 = 模型推理 + 工具行动；扩展叠在主循环上，不另起引擎。
-3. 主循环是 gather → act → verify，人可以打断改向。
-4. 默认可及仓库、终端与持久说明（CLAUDE.md / memory）；会话可恢复。
-5. 多表面共用同一引擎；读系统应盯 loop 与配置，而不是某个客户端。
-6. 权限与 checkpoint 是系统设计的一部分；没有源码时，官方架构页 + SDK loop + 本机落盘，就是可读的「源代码替代品」。
+- **Harness vs Model**：L2 管行动与约束，L3a 管推理  
+- **CLAUDE.md vs Skills**：前者启动必加载；后者按需 / 斜杠触发  
+- **Skill vs Tool / MCP**：Skill 教「怎么做」；Tool（含 MCP）是「能调用的动作」  
+- **Hooks vs Skill / CLAUDE.md**：Hooks 是确定性事件脚本；后两者是给模型看的说明，不保证每次执行  
+- **Subagent vs Agent teams**：同 Session 内隔离工人 vs 多 Session 协作（后者偏 experimental）  
+- **Checkpoint vs 撤销远端副作用**：前者主要罩文件编辑  
 
 ---
 
-## 9. 下一步：落盘地图
+## 8. 边界
 
-全貌只回答「它是什么系统」。下一篇换镜头：东西实际写在磁盘哪。
+- 默认是 **人 + Agent 协作**，不是无人交付  
+- Gate 管得住纳入 checkpoint 的本地编辑；**管不住**没纳入的远端副作用  
+- 只会某个客户端（只盯 L1）永远学不完；差距在 Context 怎么喂、Gate 怎么设、Loop 里你怎么验收  
 
-→ [02 落盘地图：配置与会话](/ai/claude-code/02-layout/)
+能指着图讲清 **Harness / Loop / L0–L4**，以及扩展各在何时挂上，这一篇就算过关。
 
-先分清用户级 `~/.claude` 与项目级 `.claude`，再看 settings 分层、会话 transcript、skills / hooks 通常落在哪——没有 `src/`，这些路径就是结构图。
+---
+
+## 9. 下一步
+
+换镜头看配置和会话**落在磁盘哪**，Settings 怎么叠。
+
+→ [02 落盘：配置与会话](/ai/claude-code/02-layout/)

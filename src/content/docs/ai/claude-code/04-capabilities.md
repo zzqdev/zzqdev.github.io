@@ -1,6 +1,6 @@
 ---
-title: 04 能力面：Tools 与扩展
-description: 局部——内建工具与 Skills、MCP、Hooks、Subagents
+title: 04 扩展：Tools、Skills、MCP、Hooks
+description: 内建工具与 Skills、MCP、Hooks、Subagents 各管什么
 ---
 
 正文稍后补。先记住阅读目标：内建工具五类，以及叠在 loop 上的扩展面各解决什么问题。
