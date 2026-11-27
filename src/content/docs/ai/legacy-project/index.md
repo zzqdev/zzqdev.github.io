@@ -1,18 +1,40 @@
 ---
 title: 老项目理解 · 文章目录
-description: 用全局→局部→关系读懂陌生仓库，目录参考课前学习资料
+description: 摸清陌生老项目的可实战流程：八步 → 图 → 清单 → CLAUDE.md → Skill → 一键串跑
 ---
 
-文章标题按「人理解老项目」的顺序：**全局 → 局部 → 关系 → 改动**。  
-章节结构参考《企业级 AI 编程实战营》课前学习资料；正文按博客口吻写，不当教程清单。
+目标不是读懂每一行，而是**当天能产出一套 AI 协作基础设施**，之后改代码有地图、有常识、有可复用流程。
+
+素材来自《Claude Code 企业级老项目改造实战》第二部分；正文讲方法与验收，**可复制提示词集中在 [07 提示词手册](/ai/legacy-project/07-prompts/)**。
 
 ## 文章目录
 
-| 层次 | 文章 | 关注点 |
+| # | 文章 | 你当场能带走什么 |
 | --- | --- | --- |
-| 全局 | [01 全貌](/ai/legacy-project/01-overview/) | 是什么、边界、价值与支柱预告 |
-| 全局 | [02 目录地图](/ai/legacy-project/02-repo-map/) | 工具层次、配置与仓库结构怎么读 |
-| 局部 | [03 主链路](/ai/legacy-project/03-main-path/) | 一次协作从想清楚到做完怎么走 |
-| 局部 | [04 关键模块](/ai/legacy-project/04-modules/) | Agent、SDD 工具、Skills、Harness 组件 |
-| 关系 | [05 关系](/ai/legacy-project/05-relations/) | 支柱闭环、工具边界、文档链如何咬合 |
-| 改动 | [06 改动入口](/ai/legacy-project/06-change-entry/) | 从哪下手、护栏、验证与能力守住 |
+| 01 | [八步心法](/ai/legacy-project/01-overview/) | 锚点清单 + 三原则 |
+| 02 | [四类图](/ai/legacy-project/02-repo-map/) | 画图能力装法 + 四类图用途 |
+| 03 | [三张全景](/ai/legacy-project/03-main-path/) | 架构 / 模块 / 外部依赖落盘与 review |
+| 04 | [接口与模型](/ai/legacy-project/04-modules/) | 清单、模型、互校要点 |
+| 05 | [常识与 Skill](/ai/legacy-project/05-relations/) | CLAUDE.md 写法 + 挖 Skill |
+| 06 | [一键摸清](/ai/legacy-project/06-change-entry/) | 串跑流程、产出树、完成标准 |
+| 07 | [提示词手册](/ai/legacy-project/07-prompts/) | 全部可复制提示词（含一键） |
+
+## 最短路径
+
+1. 扫一眼 [01](/ai/legacy-project/01-overview/)  
+2. 打开 [07](/ai/legacy-project/07-prompts/) 粘贴「一键摸清」  
+3. 卡壳再回 [02](/ai/legacy-project/02-repo-map/)–[06](/ai/legacy-project/06-change-entry/) 看坑与验收  
+
+## 跑完仓库应有
+
+```text
+CLAUDE.md
+.claude/skills/<某个技能>/SKILL.md
+docs/
+  architecture.svg
+  module-deps.svg
+  external-deps.svg
+  api-list.md
+  data-model.md
+  data-model-er.svg
+```
