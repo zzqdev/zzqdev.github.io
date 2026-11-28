@@ -17,14 +17,19 @@ const pathname = Astro.url.pathname;
 const nav = [
 	{ label: '技术笔记', href: '/notes/example/' },
 	{ label: 'AI 编程', href: '/ai/' },
+	{ label: 'AI 工程', href: '/ai-eng/' },
 	{ label: '作品', href: '/projects/' },
 ];
 
+/** Match section by path prefix; longer prefixes win (e.g. /ai-eng before /ai). */
+const sectionPrefix = (href: string) => href.replace(/\/$/, '').split('/').slice(0, 2).join('/') || href;
+
 const isActive = (href: string) => {
-	if (href.startsWith('/notes')) return pathname.startsWith('/notes');
-	if (href.startsWith('/ai')) return pathname.startsWith('/ai');
-	if (href.startsWith('/projects')) return pathname.startsWith('/projects');
-	return pathname === href || pathname === href.replace(/\/$/, '');
+	const prefix = sectionPrefix(href);
+	if (prefix === '/ai') {
+		return pathname === '/ai' || pathname.startsWith('/ai/');
+	}
+	return pathname === prefix || pathname.startsWith(`${prefix}/`);
 };
 ---
 

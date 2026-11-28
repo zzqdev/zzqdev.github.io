@@ -61,7 +61,35 @@ export default defineConfig({
 						},
 						{
 							label: 'SDD',
-							items: [{ label: '文章目录', slug: 'ai/sdd' }],
+							items: [
+								{ label: '文章目录', slug: 'ai/sdd' },
+								{ label: '01 是什么·为什么', slug: 'ai/sdd/01-what-why' },
+								{ label: '02 四步闭环', slug: 'ai/sdd/02-loop' },
+								{ label: '03 规范怎么写', slug: 'ai/sdd/03-write-spec' },
+								{ label: '04 协作与分工', slug: 'ai/sdd/04-collab' },
+								{ label: '05 验收', slug: 'ai/sdd/05-acceptance' },
+								{ label: '06 工具谱系与选型', slug: 'ai/sdd/06-tools' },
+								{ label: '07 模板与提示词', slug: 'ai/sdd/07-templates' },
+								{ label: '08 实践与常用命令', slug: 'ai/sdd/08-practice' },
+								{ label: '09 局限与踩坑', slug: 'ai/sdd/09-pitfalls' },
+							],
+						},
+					],
+				},
+				{
+					label: 'AI 工程',
+					items: [
+						{ label: 'AI 工程入门', slug: 'ai-eng' },
+						{
+							label: 'RAG',
+							items: [
+								{ label: '文章目录', slug: 'ai-eng/rag' },
+								{ label: '01 基础链路', slug: 'ai-eng/rag/01-basics' },
+								{ label: '02 常用增强', slug: 'ai-eng/rag/02-enhancements' },
+								{ label: '03 进阶', slug: 'ai-eng/rag/03-advanced' },
+								{ label: '04 评测', slug: 'ai-eng/rag/04-evaluation' },
+								{ label: '05 全局认知', slug: 'ai-eng/rag/05-overview' },
+							],
 						},
 					],
 				},

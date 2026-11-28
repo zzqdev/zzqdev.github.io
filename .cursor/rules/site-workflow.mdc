@@ -12,8 +12,10 @@ Astro Starlight 站点，中文，视觉偏 Fumadocs（米白 + 暖橙强调）�
 - 首页：`src/content/docs/index.mdx`（`template: splash`）
 - 笔记：`src/content/docs/notes/*.md(x)`
 - AI 编程：`src/content/docs/ai/*.md(x)`（子栏目如 `ai/legacy-project/`、`ai/claude-code/`）
+- AI 工程：`src/content/docs/ai-eng/*.md(x)`（子栏目如 `ai-eng/rag/`、`ai-eng/agentic/`）
 - 作品：`src/content/docs/projects/*.md(x)`
 - 侧边栏 / 站点信息：`astro.config.mjs`
+- 顶栏一级分区：`src/components/Header.astro` 的 `nav` + `Sidebar.astro` 的 `sectionByPath`（新增一级栏目时两处都要加；`/ai-eng` 须排在 `/ai` 前）
 - 主题色：`src/styles/global.css`
 
 ## 新增笔记

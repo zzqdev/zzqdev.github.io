@@ -6,14 +6,18 @@ import SidebarSublist from '@astrojs/starlight/components/SidebarSublist.astro';
 const { sidebar } = Astro.locals.starlightRoute;
 const pathname = Astro.url.pathname;
 
-/** Top-nav section → sidebar group label */
+/** Top-nav section → sidebar group label（较长前缀优先，避免 /ai-eng 误进 /ai） */
 const sectionByPath = [
 	{ prefix: '/notes', label: '技术笔记' },
+	{ prefix: '/ai-eng', label: 'AI 工程' },
 	{ prefix: '/ai', label: 'AI 编程' },
 	{ prefix: '/projects', label: '作品' },
 ] as const;
 
-const activeSection = sectionByPath.find(({ prefix }) => pathname.startsWith(prefix));
+const matchesPrefix = (pathname: string, prefix: string) =>
+	pathname === prefix || pathname.startsWith(`${prefix}/`);
+
+const activeSection = sectionByPath.find(({ prefix }) => matchesPrefix(pathname, prefix));
 
 /**
  * When a top-nav section is active, only show that group's pages
