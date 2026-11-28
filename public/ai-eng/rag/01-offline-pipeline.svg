@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="420" viewBox="0 0 1080 420" role="img" aria-labelledby="title desc">
+  <title id="title">索引构建（离线）</title>
+  <desc id="desc">文档经解析、清洗、围栏、切分、Embedding 后写入向量库</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 z" fill="#44403c"/>
+    </marker>
+    <style>
+      .f{font-family:ui-sans-serif,system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+    </style>
+  </defs>
+
+  <rect width="1080" height="420" fill="#f7f6f3"/>
+  <text class="f" x="540" y="36" text-anchor="middle" fill="#1c1917" font-size="18" font-weight="700">索引构建 · 离线</text>
+  <text class="f" x="540" y="58" text-anchor="middle" fill="#78716c" font-size="12">把文档变成可检索的向量与元数据</text>
+
+  <!-- group: 原文 -->
+  <rect x="32" y="88" width="140" height="250" rx="14" fill="#f5f5f4" stroke="#a8a29e" stroke-width="2"/>
+  <text class="f" x="102" y="118" text-anchor="middle" fill="#57534e" font-size="12" font-weight="700">原文</text>
+  <rect x="52" y="148" width="100" height="88" rx="12" fill="#44403c"/>
+  <text class="f" x="102" y="188" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">文档</text>
+  <text class="f" x="102" y="210" text-anchor="middle" fill="#d6d3d1" font-size="11">PDF / Word…</text>
+  <text class="f" x="102" y="300" text-anchor="middle" fill="#78716c" font-size="11">输入</text>
+
+  <line x1="172" y1="192" x2="204" y2="192" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- group: 预处理 -->
+  <rect x="212" y="88" width="280" height="250" rx="14" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <rect x="212" y="88" width="8" height="250" rx="2" fill="#2563eb"/>
+  <text class="f" x="236" y="118" fill="#1e40af" font-size="12" font-weight="700">预处理</text>
+  <rect x="236" y="140" width="72" height="56" rx="10" fill="#2563eb"/>
+  <text class="f" x="272" y="174" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">解析</text>
+  <line x1="308" y1="168" x2="328" y2="168" stroke="#1e40af" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="332" y="140" width="72" height="56" rx="10" fill="#3b82f6"/>
+  <text class="f" x="368" y="174" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">清洗</text>
+  <line x1="404" y1="168" x2="424" y2="168" stroke="#1e40af" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="428" y="140" width="44" height="56" rx="10" fill="#60a5fa"/>
+  <text class="f" x="450" y="174" text-anchor="middle" fill="#1e3a8a" font-size="12" font-weight="700">上传</text>
+  <text class="f" x="352" y="230" text-anchor="middle" fill="#1e40af" font-size="11">去噪 · 统一格式 · 进流水线</text>
+  <text class="f" x="352" y="300" text-anchor="middle" fill="#64748b" font-size="11">蓝：内容整形</text>
+
+  <line x1="492" y1="192" x2="524" y2="192" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- group: 安全 -->
+  <rect x="532" y="88" width="128" height="250" rx="14" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+  <rect x="532" y="88" width="8" height="250" rx="2" fill="#ea580c"/>
+  <text class="f" x="560" y="118" fill="#9a3412" font-size="12" font-weight="700">安全</text>
+  <rect x="552" y="148" width="88" height="88" rx="12" fill="#ea580c"/>
+  <text class="f" x="596" y="188" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">安全</text>
+  <text class="f" x="596" y="208" text-anchor="middle" fill="#ffedd5" font-size="12" font-weight="700">围栏</text>
+  <text class="f" x="596" y="270" text-anchor="middle" fill="#c2410c" font-size="11">鉴权 / 脱敏</text>
+  <text class="f" x="596" y="300" text-anchor="middle" fill="#78716c" font-size="11">橙：门控</text>
+
+  <line x1="660" y1="192" x2="692" y2="192" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- group: 切分 -->
+  <rect x="700" y="88" width="168" height="250" rx="14" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <rect x="700" y="88" width="8" height="250" rx="2" fill="#059669"/>
+  <text class="f" x="728" y="118" fill="#065f46" font-size="12" font-weight="700">结构化</text>
+  <rect x="724" y="140" width="120" height="44" rx="10" fill="#059669"/>
+  <text class="f" x="784" y="168" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">拆分 Chunk</text>
+  <line x1="784" y1="184" x2="784" y2="204" stroke="#047857" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="724" y="208" width="120" height="44" rx="10" fill="#10b981"/>
+  <text class="f" x="784" y="236" text-anchor="middle" fill="#064e3b" font-size="13" font-weight="700">挂元数据</text>
+  <text class="f" x="784" y="280" text-anchor="middle" fill="#047857" font-size="11">来源 · 标题 · 权限</text>
+  <text class="f" x="784" y="300" text-anchor="middle" fill="#64748b" font-size="11">绿：可检索单元</text>
+
+  <line x1="868" y1="192" x2="900" y2="192" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- group: 向量 -->
+  <rect x="908" y="88" width="148" height="250" rx="14" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+  <rect x="908" y="88" width="8" height="250" rx="2" fill="#7c3aed"/>
+  <text class="f" x="936" y="118" fill="#5b21b6" font-size="12" font-weight="700">向量化入库</text>
+  <rect x="928" y="140" width="108" height="44" rx="10" fill="#7c3aed"/>
+  <text class="f" x="982" y="168" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Embedding</text>
+  <line x1="982" y1="184" x2="982" y2="204" stroke="#6d28d9" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="928" y="208" width="108" height="56" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text class="f" x="982" y="234" text-anchor="middle" fill="#5b21b6" font-size="13" font-weight="700">向量库</text>
+  <text class="f" x="982" y="252" text-anchor="middle" fill="#7c3aed" font-size="11">Milvus 等</text>
+  <text class="f" x="982" y="300" text-anchor="middle" fill="#64748b" font-size="11">紫：可查</text>
+
+  <text class="f" x="540" y="380" text-anchor="middle" fill="#a8a29e" font-size="11">颜色按阶段区分：灰原文 → 蓝整形 → 橙门控 → 绿切分 → 紫入库</text>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="480" viewBox="0 0 560 480" role="img" aria-labelledby="title desc">
+  <title id="title">Agentic RAG 多步环</title>
+  <desc id="desc">规划后多步检索或调工具，不够则继续，够了再汇总生成</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 z" fill="#44403c"/>
+    </marker>
+    <style>.f{font-family:ui-sans-serif,system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}</style>
+  </defs>
+  <rect width="560" height="480" fill="#f7f6f3"/>
+  <text class="f" x="280" y="32" text-anchor="middle" fill="#1c1917" font-size="16" font-weight="700">Agentic RAG · 多步环</text>
+
+  <rect x="180" y="56" width="200" height="40" rx="10" fill="#44403c"/>
+  <text class="f" x="280" y="82" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">问题</text>
+  <line x1="280" y1="96" x2="280" y2="124" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="160" y="128" width="240" height="48" rx="12" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+  <text class="f" x="280" y="150" text-anchor="middle" fill="#6b21a8" font-size="13" font-weight="700">规划 Planner</text>
+  <text class="f" x="280" y="168" text-anchor="middle" fill="#7e22ce" font-size="11">紫 · 下一步动作</text>
+  <line x1="280" y1="176" x2="280" y2="204" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="140" y="208" width="280" height="48" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text class="f" x="280" y="230" text-anchor="middle" fill="#065f46" font-size="13" font-weight="700">子步骤：检索 / 调工具</text>
+  <text class="f" x="280" y="248" text-anchor="middle" fill="#047857" font-size="11">绿 · 有步数上限</text>
+  <line x1="280" y1="256" x2="280" y2="284" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <path d="M280,296 L380,336 L280,376 L180,336 Z" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text class="f" x="280" y="340" text-anchor="middle" fill="#92400e" font-size="13" font-weight="700">够不够？</text>
+
+  <path d="M180,336 H80 V240 H140" stroke="#b91c1c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <text class="f" x="100" y="280" fill="#b91c1c" font-size="12" font-weight="700">否</text>
+  <text class="f" x="100" y="300" fill="#78716c" font-size="10">再规划/再检索</text>
+
+  <path d="M380,336 H460 V400" stroke="#44403c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <text class="f" x="420" y="328" fill="#047857" font-size="12" font-weight="700">是</text>
+  <rect x="360" y="408" width="160" height="48" rx="12" fill="#ea580c"/>
+  <text class="f" x="440" y="438" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">汇总生成</text>
+</svg>

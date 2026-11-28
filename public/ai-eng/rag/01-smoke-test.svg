@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="620" viewBox="0 0 720 620" role="img" aria-labelledby="title desc">
+  <title id="title">最小联调流程</title>
+  <desc id="desc">先看检索 Chunk 再看回答，错在哪修哪</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 z" fill="#44403c"/>
+    </marker>
+    <style>
+      .f{font-family:ui-sans-serif,system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+    </style>
+  </defs>
+
+  <rect width="720" height="620" fill="#f7f6f3"/>
+  <text class="f" x="360" y="34" text-anchor="middle" fill="#1c1917" font-size="18" font-weight="700">最小联调</text>
+  <text class="f" x="360" y="56" text-anchor="middle" fill="#78716c" font-size="12">一篇文档 + 一个问题 · 先看检索再看回答</text>
+
+  <rect x="220" y="80" width="280" height="44" rx="10" fill="#44403c"/>
+  <text class="f" x="360" y="108" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">选短文档入库</text>
+  <line x1="360" y1="124" x2="360" y2="148" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="200" y="152" width="320" height="44" rx="10" fill="#7c3aed"/>
+  <text class="f" x="360" y="180" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">问一个文档里明确有答案的问题</text>
+  <line x1="360" y1="196" x2="360" y2="220" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="220" y="224" width="280" height="44" rx="10" fill="#059669"/>
+  <text class="f" x="360" y="252" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">先看检索到的 Chunk</text>
+  <line x1="360" y1="268" x2="360" y2="292" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <path d="M360,304 L460,344 L360,384 L260,344 Z" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text class="f" x="360" y="340" text-anchor="middle" fill="#92400e" font-size="13" font-weight="700">Chunk 相关吗？</text>
+  <text class="f" x="360" y="358" text-anchor="middle" fill="#b45309" font-size="11">判断</text>
+
+  <!-- no -->
+  <path d="M260,344 H120 V400" stroke="#44403c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <text class="f" x="170" y="332" fill="#b91c1c" font-size="12" font-weight="700">否</text>
+  <rect x="40" y="408" width="160" height="72" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text class="f" x="120" y="438" text-anchor="middle" fill="#1e40af" font-size="12" font-weight="700">停：先修索引</text>
+  <text class="f" x="120" y="460" text-anchor="middle" fill="#1d4ed8" font-size="11">Chunk / Embedding</text>
+
+  <!-- yes -->
+  <path d="M460,344 H600 V400" stroke="#44403c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <text class="f" x="520" y="332" fill="#047857" font-size="12" font-weight="700">是</text>
+  <rect x="520" y="408" width="160" height="48" rx="10" fill="#ea580c"/>
+  <text class="f" x="600" y="438" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">再看最终回答</text>
+  <line x1="600" y1="456" x2="600" y2="484" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <path d="M600,496 L680,528 L600,560 L520,528 Z" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text class="f" x="600" y="532" text-anchor="middle" fill="#92400e" font-size="12" font-weight="700">回答对吗？</text>
+
+  <path d="M520,528 H400 V568" stroke="#44403c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <text class="f" x="450" y="520" fill="#b91c1c" font-size="11" font-weight="700">否</text>
+  <rect x="320" y="576" width="160" height="32" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
+  <text class="f" x="400" y="598" text-anchor="middle" fill="#9a3412" font-size="11" font-weight="700">查组装与生成提示</text>
+
+  <path d="M680,528 H780 V568" stroke="#44403c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <text class="f" x="720" y="520" fill="#047857" font-size="11" font-weight="700">是</text>
+  <rect x="700" y="576" width="160" height="32" rx="8" fill="#1c1917"/>
+  <text class="f" x="780" y="598" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">基础链路跑通</text>
+</svg>

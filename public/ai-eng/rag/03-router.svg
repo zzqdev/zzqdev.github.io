@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="320" viewBox="0 0 880 320" role="img" aria-labelledby="title desc">
+  <title id="title">问题路由</title>
+  <desc id="desc">路由器把问题分到闲聊、标准 RAG、图谱或 Agent</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 z" fill="#44403c"/>
+    </marker>
+    <style>.f{font-family:ui-sans-serif,system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}</style>
+  </defs>
+  <rect width="880" height="320" fill="#f7f6f3"/>
+  <text class="f" x="440" y="30" text-anchor="middle" fill="#1c1917" font-size="16" font-weight="700">查询路由</text>
+  <text class="f" x="440" y="52" text-anchor="middle" fill="#78716c" font-size="12">不是所有问题都走最重链路</text>
+
+  <rect x="360" y="72" width="160" height="40" rx="10" fill="#44403c"/>
+  <text class="f" x="440" y="98" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">问题</text>
+  <line x1="440" y1="112" x2="440" y2="140" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="340" y="144" width="200" height="44" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text class="f" x="440" y="172" text-anchor="middle" fill="#92400e" font-size="14" font-weight="700">路由器</text>
+
+  <path d="M360,188 V210 H100 V236" stroke="#44403c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M400,188 V210 H300 V236" stroke="#44403c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M480,188 V210 H580 V236" stroke="#44403c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M520,188 V210 H780 V236" stroke="#44403c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+
+  <rect x="32" y="244" width="136" height="56" rx="10" fill="#f5f5f4" stroke="#78716c" stroke-width="2"/>
+  <text class="f" x="100" y="268" text-anchor="middle" fill="#44403c" font-size="11" font-weight="700">FAQ / 闲聊</text>
+  <text class="f" x="100" y="288" text-anchor="middle" fill="#78716c" font-size="10">缓存或直接答</text>
+
+  <rect x="232" y="244" width="136" height="56" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text class="f" x="300" y="268" text-anchor="middle" fill="#065f46" font-size="11" font-weight="700">局部事实</text>
+  <text class="f" x="300" y="288" text-anchor="middle" fill="#047857" font-size="10">向量 / 混检 RAG</text>
+
+  <rect x="512" y="244" width="136" height="56" rx="10" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+  <text class="f" x="580" y="268" text-anchor="middle" fill="#0f766e" font-size="11" font-weight="700">关系 / 全局</text>
+  <text class="f" x="580" y="288" text-anchor="middle" fill="#0d9488" font-size="10">GraphRAG</text>
+
+  <rect x="712" y="244" width="136" height="56" rx="10" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+  <text class="f" x="780" y="268" text-anchor="middle" fill="#6b21a8" font-size="11" font-weight="700">多步业务</text>
+  <text class="f" x="780" y="288" text-anchor="middle" fill="#7e22ce" font-size="10">Agentic RAG</text>
+</svg>

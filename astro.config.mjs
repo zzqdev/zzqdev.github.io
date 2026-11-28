@@ -103,6 +103,7 @@ export default defineConfig({
 				Header: './src/components/Header.astro',
 				Sidebar: './src/components/Sidebar.astro',
 				Footer: './src/components/Footer.astro',
+				Pagination: './src/components/Pagination.astro',
 			},
 		}),
 	],

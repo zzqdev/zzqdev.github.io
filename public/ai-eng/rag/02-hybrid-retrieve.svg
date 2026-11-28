@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="360" viewBox="0 0 720 360" role="img" aria-labelledby="title desc">
+  <title id="title">混合检索融合</title>
+  <desc id="desc">问题同时走向量与关键词两路，经 RRF 融合为候选列表</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 z" fill="#44403c"/>
+    </marker>
+    <style>.f{font-family:ui-sans-serif,system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}</style>
+  </defs>
+  <rect width="720" height="360" fill="#f7f6f3"/>
+  <text class="f" x="360" y="32" text-anchor="middle" fill="#1c1917" font-size="16" font-weight="700">混合检索 · 两路融合</text>
+
+  <rect x="280" y="60" width="160" height="44" rx="12" fill="#44403c"/>
+  <text class="f" x="360" y="88" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">问题</text>
+
+  <path d="M320,104 V140 H160 V168" stroke="#44403c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M400,104 V140 H560 V168" stroke="#44403c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+
+  <rect x="80" y="176" width="160" height="64" rx="12" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+  <text class="f" x="160" y="204" text-anchor="middle" fill="#5b21b6" font-size="13" font-weight="700">向量 Top-N</text>
+  <text class="f" x="160" y="224" text-anchor="middle" fill="#7c3aed" font-size="11">紫 · 语义</text>
+
+  <rect x="480" y="176" width="160" height="64" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text class="f" x="560" y="204" text-anchor="middle" fill="#065f46" font-size="13" font-weight="700">关键词 Top-N</text>
+  <text class="f" x="560" y="224" text-anchor="middle" fill="#047857" font-size="11">绿 · BM25</text>
+
+  <path d="M160,240 V280 H360" stroke="#7c3aed" stroke-width="2" fill="none"/>
+  <path d="M560,240 V280 H360" stroke="#059669" stroke-width="2" fill="none"/>
+  <line x1="360" y1="280" x2="360" y2="300" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="240" y="308" width="240" height="36" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <text class="f" x="360" y="332" text-anchor="middle" fill="#075985" font-size="13" font-weight="700">融合 RRF / 加权 → 候选列表</text>
+</svg>

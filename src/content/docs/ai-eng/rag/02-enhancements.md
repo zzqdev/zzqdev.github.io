@@ -8,14 +8,7 @@ description: 混检、Rerank、改写、引用、Parent-Child
 
 增强总览（按上手顺序）：
 
-```mermaid
-flowchart LR
-  Q[问题] --> W[查询改写]
-  W --> H[混合检索]
-  H --> R[Rerank 重排]
-  R --> C[组装上下文]
-  C --> G[生成 + 引用角标]
-```
+![常用增强总览](/ai-eng/rag/02-enhance-pipeline.svg)
 
 ---
 
@@ -35,14 +28,7 @@ flowchart LR
 2. **关键词检索**：BM25 / 全文（可用 Milvus 稀疏向量，或 ES / OpenSearch）  
 3. **融合**：把两路结果合成一份候选列表  
 
-```mermaid
-flowchart TD
-  Q[问题] --> V[向量 Top-N]
-  Q --> K[关键词 Top-N]
-  V --> F[融合 RRF / 加权]
-  K --> F
-  F --> O[候选列表]
-```
+![混合检索融合](/ai-eng/rag/02-hybrid-retrieve.svg)
 
 ### 融合：RRF（常用、好用）
 
@@ -105,12 +91,7 @@ candidates = load_entities_by_ids(fused_ids[:20])   # 供 Rerank 或直接截 To
 
 用 **Cross-Encoder / 专用 Rerank 模型**（或兼容的排序 API）：输入 `(问题, 某条 Chunk)`，输出相关分。
 
-```mermaid
-flowchart LR
-  A[候选 20 条] --> B[逐条打分]
-  B --> C[按分排序]
-  C --> D[截断 Top-K]
-```
+![Rerank 重排](/ai-eng/rag/02-rerank.svg)
 
 ### 伪代码
 
@@ -226,12 +207,7 @@ if used - valid:
 | 高亮 | 用 Chunk 文本在原文中定位（精确匹配或模糊） |
 | 无依据回答 | `refused=true` 或无角标时提示「未引用资料」 |
 
-```mermaid
-flowchart LR
-  A[回答中的 1] --> B[refs 1]
-  B --> C[doc_id + chunk]
-  C --> D[原文高亮]
-```
+![引用角标溯源](/ai-eng/rag/02-citation.svg)
 
 ### 基础注意
 
@@ -292,20 +268,7 @@ prompt = build_prompt(kept, q)
 
 ## 7. 增强后的推荐链路（拼在一起）
 
-```mermaid
-flowchart TD
-  A[用户问题] --> B[权限上下文]
-  B --> C[查询改写 / 多查询]
-  C --> D[混合检索 召回 N]
-  D --> E[Rerank → Top-K]
-  E --> F{是否 Parent-Child?}
-  F -->|是| G[取父段]
-  F -->|否| H[用 Child 原文]
-  G --> I[组装 Prompt + 角标规则]
-  H --> I
-  I --> J[生成]
-  J --> K[校验角标 / 观察日志]
-```
+![增强版端到端流程](/ai-eng/rag/02-enhance-e2e.svg)
 
 ### 伪代码：端到端（增强版）
 

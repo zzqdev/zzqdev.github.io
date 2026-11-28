@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="480" viewBox="0 0 720 480" role="img" aria-labelledby="title desc">
+  <title id="title">最小评估分流</title>
+  <desc id="desc">10 题先看检索命中率，再看回答正确率</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 z" fill="#44403c"/>
+    </marker>
+    <style>
+      .f{font-family:ui-sans-serif,system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+    </style>
+  </defs>
+
+  <rect width="720" height="480" fill="#f7f6f3"/>
+  <text class="f" x="360" y="34" text-anchor="middle" fill="#1c1917" font-size="18" font-weight="700">最小评估 · 10 题</text>
+  <text class="f" x="360" y="56" text-anchor="middle" fill="#78716c" font-size="12">先检索后生成 · 低了修对应段</text>
+
+  <rect x="260" y="80" width="200" height="44" rx="22" fill="#44403c"/>
+  <text class="f" x="360" y="108" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">10 题评估</text>
+  <line x1="360" y1="124" x2="360" y2="156" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <path d="M360,168 L470,216 L360,264 L250,216 Z" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text class="f" x="360" y="212" text-anchor="middle" fill="#92400e" font-size="13" font-weight="700">检索命中率</text>
+  <text class="f" x="360" y="230" text-anchor="middle" fill="#b45309" font-size="11">判断</text>
+
+  <!-- low retrieve -->
+  <path d="M250,216 H120 V280" stroke="#44403c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <text class="f" x="160" y="204" fill="#b91c1c" font-size="12" font-weight="700">低</text>
+  <rect x="40" y="288" width="160" height="64" rx="12" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+  <text class="f" x="120" y="316" text-anchor="middle" fill="#5b21b6" font-size="13" font-weight="700">修索引与检索</text>
+  <text class="f" x="120" y="336" text-anchor="middle" fill="#7c3aed" font-size="11">紫 / 绿段</text>
+
+  <!-- high retrieve -->
+  <path d="M470,216 H600 V280" stroke="#44403c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <text class="f" x="530" y="204" fill="#047857" font-size="12" font-weight="700">高</text>
+  <path d="M600,292 L690,332 L600,372 L510,332 Z" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text class="f" x="600" y="328" text-anchor="middle" fill="#92400e" font-size="12" font-weight="700">回答正确率</text>
+  <text class="f" x="600" y="346" text-anchor="middle" fill="#b45309" font-size="11">判断</text>
+
+  <path d="M510,332 H360 V380" stroke="#44403c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <text class="f" x="420" y="320" fill="#b91c1c" font-size="12" font-weight="700">低</text>
+  <rect x="280" y="388" width="160" height="56" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+  <text class="f" x="360" y="414" text-anchor="middle" fill="#9a3412" font-size="12" font-weight="700">修 Prompt 与生成</text>
+  <text class="f" x="360" y="432" text-anchor="middle" fill="#c2410c" font-size="11">橙段</text>
+
+  <path d="M690,332 H800 V380" stroke="#44403c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <text class="f" x="740" y="320" fill="#047857" font-size="12" font-weight="700">高</text>
+  <rect x="720" y="388" width="160" height="56" rx="12" fill="#1c1917"/>
+  <text class="f" x="800" y="414" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">基础可用</text>
+  <text class="f" x="800" y="432" text-anchor="middle" fill="#a8a29e" font-size="11">再谈进阶</text>
+</svg>

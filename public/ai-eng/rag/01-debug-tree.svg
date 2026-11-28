@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640" role="img" aria-labelledby="title desc">
+  <title id="title">回答不对时的排查树</title>
+  <desc id="desc">先查库里有没有，再查检索，再查组装，最后查生成</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 z" fill="#44403c"/>
+    </marker>
+    <style>
+      .f{font-family:ui-sans-serif,system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+    </style>
+  </defs>
+
+  <rect width="960" height="640" fill="#f7f6f3"/>
+  <text class="f" x="480" y="36" text-anchor="middle" fill="#1c1917" font-size="18" font-weight="700">回答不对 · 先查哪</text>
+  <text class="f" x="480" y="58" text-anchor="middle" fill="#78716c" font-size="12">红=问题起点 · 菱形=判断 · 色块=对应修哪里</text>
+
+  <!-- start -->
+  <rect x="360" y="80" width="240" height="48" rx="24" fill="#dc2626"/>
+  <text class="f" x="480" y="110" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">回答不对</text>
+  <line x1="480" y1="128" x2="480" y2="156" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- Q1 diamond -->
+  <path d="M480,168 L600,216 L480,264 L360,216 Z" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text class="f" x="480" y="212" text-anchor="middle" fill="#92400e" font-size="13" font-weight="700">库里有没有</text>
+  <text class="f" x="480" y="230" text-anchor="middle" fill="#b45309" font-size="12">相关内容？</text>
+
+  <!-- no branch left -->
+  <path d="M360,216 H200 V280" stroke="#44403c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <text class="f" x="268" y="208" fill="#b91c1c" font-size="12" font-weight="700">没有</text>
+  <rect x="88" y="288" width="224" height="72" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <rect x="88" y="288" width="8" height="72" rx="2" fill="#2563eb"/>
+  <text class="f" x="112" y="318" fill="#1e40af" font-size="13" font-weight="700">查索引源头</text>
+  <text class="f" x="112" y="340" fill="#1d4ed8" font-size="12">解析 / 清洗 / Chunk</text>
+  <text class="f" x="200" y="380" text-anchor="middle" fill="#64748b" font-size="11">蓝 · 与离线预处理对应</text>
+
+  <!-- yes -->
+  <text class="f" x="500" y="280" fill="#047857" font-size="12" font-weight="700">有</text>
+  <line x1="480" y1="264" x2="480" y2="300" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- Q2 -->
+  <path d="M480,312 L600,360 L480,408 L360,360 Z" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text class="f" x="480" y="356" text-anchor="middle" fill="#92400e" font-size="13" font-weight="700">检索有没有</text>
+  <text class="f" x="480" y="374" text-anchor="middle" fill="#b45309" font-size="12">捞到？</text>
+
+  <!-- no retrieve -->
+  <path d="M360,360 H200 V424" stroke="#44403c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <text class="f" x="268" y="352" fill="#b91c1c" font-size="12" font-weight="700">没有</text>
+  <rect x="88" y="432" width="224" height="72" rx="12" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+  <rect x="88" y="432" width="8" height="72" rx="2" fill="#7c3aed"/>
+  <text class="f" x="112" y="462" fill="#5b21b6" font-size="13" font-weight="700">查向量与检索</text>
+  <text class="f" x="112" y="484" fill="#6d28d9" font-size="12">Embedding / 检索方式</text>
+  <text class="f" x="200" y="524" text-anchor="middle" fill="#64748b" font-size="11">紫 · 与向量段对应</text>
+
+  <!-- yes retrieve -->
+  <text class="f" x="500" y="424" fill="#047857" font-size="12" font-weight="700">有</text>
+  <line x1="480" y1="408" x2="480" y2="444" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- Q3 -->
+  <path d="M480,456 L600,504 L480,552 L360,504 Z" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text class="f" x="480" y="500" text-anchor="middle" fill="#92400e" font-size="13" font-weight="700">拼进 Prompt</text>
+  <text class="f" x="480" y="518" text-anchor="middle" fill="#b45309" font-size="12">了吗？</text>
+
+  <!-- no / messy -->
+  <path d="M360,504 H200" stroke="#44403c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <text class="f" x="250" y="492" fill="#b91c1c" font-size="11" font-weight="700">没有 / 拼乱</text>
+  <rect x="48" y="560" width="200" height="56" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text class="f" x="148" y="586" text-anchor="middle" fill="#1e40af" font-size="13" font-weight="700">查组装上下文</text>
+  <text class="f" x="148" y="606" text-anchor="middle" fill="#64748b" font-size="11">蓝 · 拼 Prompt</text>
+
+  <!-- yes prompt -->
+  <path d="M600,504 H760 V560" stroke="#44403c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <text class="f" x="680" y="492" fill="#047857" font-size="12" font-weight="700">有</text>
+  <rect x="668" y="568" width="220" height="56" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+  <rect x="668" y="568" width="8" height="56" rx="2" fill="#ea580c"/>
+  <text class="f" x="692" y="594" fill="#9a3412" font-size="13" font-weight="700">查生成提示与模型</text>
+  <text class="f" x="692" y="614" fill="#c2410c" font-size="11">橙 · 最后才怪模型</text>
+</svg>

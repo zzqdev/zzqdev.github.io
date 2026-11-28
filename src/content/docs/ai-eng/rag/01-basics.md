@@ -7,29 +7,11 @@ description: 离线索引与在线检索、Milvus、联调与最小评估
 
 ## 1. 索引构建（离线）
 
-```mermaid
-flowchart LR
-  A[文档] --> B[解析]
-  B --> C[清洗]
-  C --> D[上传]
-  D --> E[安全围栏]
-  E --> F[拆分 Chunk]
-  F --> M[挂元数据]
-  M --> G[Embedding]
-  G --> H[(向量库)]
-```
+![索引构建（离线）流程](/ai-eng/rag/01-offline-pipeline.svg)
 
 ## 2. 检索生成（在线）
 
-```mermaid
-flowchart LR
-  Q[用户问题] --> E[Embedding]
-  E --> R[检索]
-  K[(向量库)] --> R
-  R --> C[组装上下文]
-  C --> G[大模型生成]
-  G --> A[回答]
-```
+![检索生成（在线）流程](/ai-eng/rag/01-online-pipeline.svg)
 
 ## 名词解释
 
@@ -59,16 +41,7 @@ flowchart LR
 链路知道之后，优先补 **「效果差时查哪」**。  
 多数问题出在这三处，先会排查，再谈进阶优化。
 
-```mermaid
-flowchart TD
-  P[回答不对] --> A{库里有没有相关内容?}
-  A -->|没有| B[回头查索引：解析 / 清洗 / Chunk]
-  A -->|有| C{检索有没有捞到?}
-  C -->|没有| D[查 Embedding / 检索方式]
-  C -->|有| E{拼进 Prompt 了吗?}
-  E -->|没有 / 拼乱了| F[查组装上下文]
-  E -->|有| G[再查生成提示与模型]
-```
+![回答不对时的排查树](/ai-eng/rag/01-debug-tree.svg)
 
 ### 1. Chunk 怎么切（影响最大）
 
@@ -113,14 +86,7 @@ flowchart TD
 Milvus 里一张表叫 **Collection**。  
 一条 Chunk 对应一行 Entity，至少包含：**主键 + 向量 + 文本 + 元数据**。
 
-```mermaid
-flowchart LR
-  C[Collection] --> E[一行 = 一个 Chunk]
-  E --> PK[id 主键]
-  E --> V[embedding 向量]
-  E --> T[text 原文]
-  E --> M[元数据字段]
-```
+![Milvus Collection 字段结构](/ai-eng/rag/01-collection-schema.svg)
 
 ### 基础 Schema（建议字段）
 
@@ -139,14 +105,7 @@ flowchart LR
 
 ### 怎么存（入库流程）
 
-```mermaid
-flowchart TD
-  A[解析 / 清洗 / 切分 Chunk] --> B[逐条 Embedding]
-  B --> C[组装 Entity: id + 向量 + text + 元数据]
-  C --> D[insert 写入 Collection]
-  D --> E[create_index 建向量索引]
-  E --> F[load 加载到内存可查]
-```
+![入库流程](/ai-eng/rag/01-ingest-flow.svg)
 
 ### 伪代码：建库 + 入库
 
@@ -224,17 +183,7 @@ answer  = llm.generate(prompt=system + context + user_question)
 
 用 **一篇文档 + 一个问题** 验证整条链路：
 
-```mermaid
-flowchart TD
-  A[选一篇短文档入库] --> B[问一个文档里明确有答案的问题]
-  B --> C[先看检索到的 Chunk]
-  C --> D{Chunk 相关吗?}
-  D -->|否| E[停：先修索引 / Chunk / Embedding]
-  D -->|是| F[再看最终回答]
-  F --> G{回答对吗?}
-  G -->|否| H[查组装上下文与生成提示]
-  G -->|是| I[基础链路跑通]
-```
+![最小联调流程](/ai-eng/rag/01-smoke-test.svg)
 
 检查顺序（很重要）：
 
@@ -297,13 +246,7 @@ for hit in results:
 
 文档一变，旧 Chunk 必须换掉，否则会检索到过期内容。
 
-```mermaid
-flowchart TD
-  A[文档更新] --> B[按 doc_id 删除旧 Chunk]
-  B --> C[重新解析 / 切分 / Embedding]
-  C --> D[insert 新 Chunk]
-  D --> E[再问原问题验证]
-```
+![文档更新流程](/ai-eng/rag/01-doc-update.svg)
 
 ### 伪代码
 
@@ -491,14 +434,7 @@ if token_len(prompt) > max_ctx:
 | 检索高、回答低 | Prompt 模板 / 上下文组装 / 生成说明 |
 | 库外题也硬答 | 系统说明里的「不足则不编」 |
 
-```mermaid
-flowchart TD
-  A[10 题评估] --> B{检索命中率}
-  B -->|低| C[修索引与检索]
-  B -->|高| D{回答正确率}
-  D -->|低| E[修 Prompt 与生成]
-  D -->|高| F[基础可用，再谈进阶]
-```
+![最小评估分流](/ai-eng/rag/01-mini-eval.svg)
 
 ### 伪代码：跑一轮最小评估
 
@@ -569,17 +505,7 @@ results = client.search(
 
 大目录不要「一口气全塞」；按文件推进，失败记下来，可重跑。
 
-```mermaid
-flowchart TD
-  A[扫描目录] --> B[逐文件处理]
-  B --> C{成功?}
-  C -->|是| D[记 success 日志]
-  C -->|否| E[记 failed: 文件 / 阶段 / 错误]
-  E --> F[跳过继续下一个]
-  D --> B
-  F --> B
-  B --> G[全部跑完后重试 failed 列表]
-```
+![批量入库与失败重试](/ai-eng/rag/01-batch-ingest.svg)
 
 ### 伪代码
 

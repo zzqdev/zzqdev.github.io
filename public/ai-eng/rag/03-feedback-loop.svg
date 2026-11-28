@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="200" viewBox="0 0 960 200" role="img" aria-labelledby="title desc">
+  <title id="title">反馈闭环</title>
+  <desc id="desc">线上问答经反馈进入坏例库，归类后改进再回流</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 z" fill="#44403c"/>
+    </marker>
+    <style>.f{font-family:ui-sans-serif,system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}</style>
+  </defs>
+  <rect width="960" height="200" fill="#f7f6f3"/>
+  <text class="f" x="480" y="28" text-anchor="middle" fill="#1c1917" font-size="15" font-weight="700">反馈闭环 · 持续变好</text>
+
+  <rect x="24" y="56" width="140" height="80" rx="12" fill="#44403c"/>
+  <text class="f" x="94" y="94" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">线上问答</text>
+  <text class="f" x="94" y="114" text-anchor="middle" fill="#a8a29e" font-size="11">灰</text>
+  <line x1="164" y1="96" x2="192" y2="96" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="200" y="56" width="160" height="80" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text class="f" x="280" y="90" text-anchor="middle" fill="#991b1b" font-size="12" font-weight="700">点赞 / 点踩</text>
+  <text class="f" x="280" y="110" text-anchor="middle" fill="#b91c1c" font-size="12" font-weight="700">/ 修正</text>
+  <line x1="360" y1="96" x2="388" y2="96" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="396" y="56" width="120" height="80" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+  <text class="f" x="456" y="100" text-anchor="middle" fill="#9a3412" font-size="13" font-weight="700">坏例库</text>
+  <line x1="516" y1="96" x2="544" y2="96" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="552" y="56" width="180" height="80" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text class="f" x="642" y="86" text-anchor="middle" fill="#92400e" font-size="11" font-weight="700">归类</text>
+  <text class="f" x="642" y="106" text-anchor="middle" fill="#b45309" font-size="11">检索/生成/权限/过期</text>
+  <line x1="732" y1="96" x2="760" y2="96" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="768" y="56" width="168" height="80" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text class="f" x="852" y="90" text-anchor="middle" fill="#065f46" font-size="12" font-weight="700">改 Chunk / 改写</text>
+  <text class="f" x="852" y="110" text-anchor="middle" fill="#047857" font-size="11">/ 评测集</text>
+
+  <path d="M852,136 V168 H94 V136" stroke="#059669" stroke-width="1.5" fill="none" stroke-dasharray="5 4" marker-end="url(#a)"/>
+  <text class="f" x="480" y="184" text-anchor="middle" fill="#64748b" font-size="11">绿回流 · 再进线上</text>
+</svg>

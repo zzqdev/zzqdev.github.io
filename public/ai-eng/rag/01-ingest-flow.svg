@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="220" viewBox="0 0 960 220" role="img" aria-labelledby="title desc">
+  <title id="title">入库流程</title>
+  <desc id="desc">切分 → Embedding → 组装 Entity → insert → 建索引 → load</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 z" fill="#44403c"/>
+    </marker>
+    <style>
+      .f{font-family:ui-sans-serif,system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+    </style>
+  </defs>
+
+  <rect width="960" height="220" fill="#f7f6f3"/>
+  <text class="f" x="480" y="32" text-anchor="middle" fill="#1c1917" font-size="16" font-weight="700">怎么存 · 入库流程</text>
+
+  <!-- step 1 blue prep -->
+  <rect x="24" y="60" width="140" height="100" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text class="f" x="94" y="96" text-anchor="middle" fill="#1e40af" font-size="12" font-weight="700">解析 / 清洗</text>
+  <text class="f" x="94" y="118" text-anchor="middle" fill="#1d4ed8" font-size="12" font-weight="700">切分 Chunk</text>
+  <text class="f" x="94" y="144" text-anchor="middle" fill="#64748b" font-size="11">蓝</text>
+
+  <line x1="164" y1="110" x2="188" y2="110" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- step 2 purple -->
+  <rect x="196" y="60" width="120" height="100" rx="12" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+  <text class="f" x="256" y="106" text-anchor="middle" fill="#5b21b6" font-size="13" font-weight="700">逐条</text>
+  <text class="f" x="256" y="128" text-anchor="middle" fill="#7c3aed" font-size="12" font-weight="700">Embedding</text>
+  <text class="f" x="256" y="144" text-anchor="middle" fill="#64748b" font-size="11">紫</text>
+
+  <line x1="316" y1="110" x2="340" y2="110" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- step 3 green -->
+  <rect x="348" y="60" width="148" height="100" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text class="f" x="422" y="96" text-anchor="middle" fill="#065f46" font-size="12" font-weight="700">组装 Entity</text>
+  <text class="f" x="422" y="118" text-anchor="middle" fill="#047857" font-size="11">id+向量+text+元数据</text>
+  <text class="f" x="422" y="144" text-anchor="middle" fill="#64748b" font-size="11">绿</text>
+
+  <line x1="496" y1="110" x2="520" y2="110" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- step 4 orange write -->
+  <rect x="528" y="60" width="120" height="100" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+  <text class="f" x="588" y="106" text-anchor="middle" fill="#9a3412" font-size="13" font-weight="700">insert</text>
+  <text class="f" x="588" y="128" text-anchor="middle" fill="#c2410c" font-size="11">写入 Collection</text>
+  <text class="f" x="588" y="144" text-anchor="middle" fill="#64748b" font-size="11">橙</text>
+
+  <line x1="648" y1="110" x2="672" y2="110" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- step 5 stone index -->
+  <rect x="680" y="60" width="120" height="100" rx="12" fill="#f5f5f4" stroke="#78716c" stroke-width="2"/>
+  <text class="f" x="740" y="96" text-anchor="middle" fill="#44403c" font-size="12" font-weight="700">create_index</text>
+  <text class="f" x="740" y="118" text-anchor="middle" fill="#57534e" font-size="11">建向量索引</text>
+  <text class="f" x="740" y="144" text-anchor="middle" fill="#64748b" font-size="11">灰</text>
+
+  <line x1="800" y1="110" x2="824" y2="110" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- step 6 dark ready -->
+  <rect x="832" y="60" width="112" height="100" rx="12" fill="#1c1917"/>
+  <text class="f" x="888" y="106" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">load</text>
+  <text class="f" x="888" y="128" text-anchor="middle" fill="#d6d3d1" font-size="11">可查</text>
+
+  <text class="f" x="480" y="196" text-anchor="middle" fill="#a8a29e" font-size="11">没 load 就不能稳定 search</text>
+</svg>

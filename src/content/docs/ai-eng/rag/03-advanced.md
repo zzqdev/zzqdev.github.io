@@ -38,18 +38,7 @@ description: GraphRAG、Agent、反馈闭环、路由与微调决策
 
 ### 基础形态（简化）
 
-```mermaid
-flowchart TD
-  D[文档] --> E[抽实体 / 关系]
-  E --> G[(知识图谱)]
-  D --> V[(向量库)]
-  Q[问题] --> T{问题类型}
-  T -->|局部事实| V
-  T -->|关系 / 全局| G
-  V --> M[合并上下文]
-  G --> M
-  M --> L[生成]
-```
+![向量与图谱双路](/ai-eng/rag/03-graph-rag.svg)
 
 ### 常见两路
 
@@ -90,15 +79,7 @@ answer  = llm.generate(build_prompt(context, question))
 
 一次「改写 → 检索 → 生成」不够时：需要拆子问题、补查、调用业务 API。
 
-```mermaid
-flowchart TD
-  Q[问题] --> P[规划 Planner]
-  P --> S1[子步骤1: 检索]
-  S1 --> J{够不够?}
-  J -->|否| S2[子步骤2: 再检索 / 调工具]
-  S2 --> J
-  J -->|是| A[汇总生成]
-```
+![Agentic RAG 多步环](/ai-eng/rag/03-agentic-rag.svg)
 
 ### 最小 Agent 环
 
@@ -138,14 +119,7 @@ answer = llm.generate(final_prompt(state))
 
 ### 闭环长什么样
 
-```mermaid
-flowchart LR
-  A[线上问答] --> B[点赞 / 点踩 / 修正]
-  B --> C[坏例库]
-  C --> D[归类: 检索差 / 生成差 / 权限 / 过期]
-  D --> E[改 Chunk / 改写 / 评测集]
-  E --> A
-```
+![反馈闭环](/ai-eng/rag/03-feedback-loop.svg)
 
 ### 最小字段
 
@@ -283,14 +257,7 @@ train_embedding(base_model, triplets)
 
 不是所有问题都走最重的 Agentic / Graph 链路。
 
-```mermaid
-flowchart TD
-  Q[问题] --> R[路由器]
-  R -->|FAQ / 闲聊| F[缓存或直接答]
-  R -->|局部事实| V[向量 / 混检 RAG]
-  R -->|关系 / 全局| G[GraphRAG]
-  R -->|多步业务| A[Agentic RAG]
-```
+![问题路由](/ai-eng/rag/03-router.svg)
 
 ### 伪代码
 
@@ -313,20 +280,7 @@ if route == "agent":
 
 ## 8. 进阶架构拼装（一张总图）
 
-```mermaid
-flowchart TD
-  U[用户] --> RT[路由]
-  RT --> SR[标准增强 RAG]
-  RT --> GR[图谱 RAG]
-  RT --> AG[Agentic RAG]
-  SR --> F[反馈与评测]
-  GR --> F
-  AG --> F
-  F --> IDX[索引 / 图谱 / 提示策略更新]
-  IDX --> SR
-  IDX --> GR
-  IDX --> AG
-```
+![进阶架构总图](/ai-eng/rag/03-architecture.svg)
 
 ### 伪代码：统一入口
 

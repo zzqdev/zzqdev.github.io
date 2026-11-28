@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="160" viewBox="0 0 880 160" role="img" aria-labelledby="title desc">
+  <title id="title">Rerank 重排</title>
+  <desc id="desc">候选多条逐条打分、排序后截断 Top-K</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 z" fill="#44403c"/>
+    </marker>
+    <style>.f{font-family:ui-sans-serif,system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}</style>
+  </defs>
+  <rect width="880" height="160" fill="#f7f6f3"/>
+  <text class="f" x="440" y="28" text-anchor="middle" fill="#1c1917" font-size="15" font-weight="700">Rerank · 先多召回再精排</text>
+
+  <rect x="32" y="56" width="160" height="64" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text class="f" x="112" y="86" text-anchor="middle" fill="#065f46" font-size="13" font-weight="700">候选 20 条</text>
+  <text class="f" x="112" y="106" text-anchor="middle" fill="#047857" font-size="11">绿 · 召回池</text>
+  <line x1="192" y1="88" x2="224" y2="88" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="232" y="56" width="160" height="64" rx="12" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <text class="f" x="312" y="86" text-anchor="middle" fill="#075985" font-size="13" font-weight="700">逐条打分</text>
+  <text class="f" x="312" y="106" text-anchor="middle" fill="#0369a1" font-size="11">交叉编码</text>
+  <line x1="392" y1="88" x2="424" y2="88" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="432" y="56" width="160" height="64" rx="12" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <text class="f" x="512" y="86" text-anchor="middle" fill="#075985" font-size="13" font-weight="700">按分排序</text>
+  <text class="f" x="512" y="106" text-anchor="middle" fill="#0369a1" font-size="11">青 · 精排</text>
+  <line x1="592" y1="88" x2="624" y2="88" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="632" y="56" width="216" height="64" rx="12" fill="#1c1917"/>
+  <text class="f" x="740" y="86" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">截断 Top-K</text>
+  <text class="f" x="740" y="106" text-anchor="middle" fill="#d6d3d1" font-size="11">例如 5 条进 Prompt</text>
+</svg>

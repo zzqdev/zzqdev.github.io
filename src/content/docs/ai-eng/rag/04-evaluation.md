@@ -11,15 +11,7 @@ description: 如何验证、指标拆分、Ragas / DeepEval / TruLens
 
 RAG 不要只看「最终答得对不对」。至少拆两段：
 
-```mermaid
-flowchart LR
-  Q[问题] --> R[检索]
-  R --> G[生成]
-  R -.-> M1[检索指标]
-  G -.-> M2[生成指标]
-  R --> M3[端到端正确 / 引用]
-  G --> M3
-```
+![评测三层指标](/ai-eng/rag/04-eval-layers.svg)
 
 | 层级 | 在问什么 | 没过先修哪 |
 |------|----------|------------|

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="320" viewBox="0 0 800 320" role="img" aria-labelledby="title desc">
+  <title id="title">评测三层指标</title>
+  <desc id="desc">问题经检索与生成，分别对应检索指标、生成指标与端到端正确引用</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 z" fill="#44403c"/>
+    </marker>
+    <style>.f{font-family:ui-sans-serif,system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}</style>
+  </defs>
+  <rect width="800" height="320" fill="#f7f6f3"/>
+  <text class="f" x="400" y="30" text-anchor="middle" fill="#1c1917" font-size="16" font-weight="700">评测 · 先分清验哪一段</text>
+  <text class="f" x="400" y="52" text-anchor="middle" fill="#78716c" font-size="12">口诀：先看检索，再看生成</text>
+
+  <rect x="40" y="100" width="120" height="56" rx="12" fill="#44403c"/>
+  <text class="f" x="100" y="134" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">问题</text>
+  <line x1="160" y1="128" x2="200" y2="128" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="208" y="100" width="140" height="56" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text class="f" x="278" y="134" text-anchor="middle" fill="#065f46" font-size="14" font-weight="700">检索</text>
+  <line x1="348" y1="128" x2="388" y2="128" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="396" y="100" width="140" height="56" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+  <text class="f" x="466" y="134" text-anchor="middle" fill="#9a3412" font-size="14" font-weight="700">生成</text>
+
+  <!-- metrics -->
+  <path d="M278,156 V188" stroke="#059669" stroke-width="2" fill="none" marker-end="url(#a)" stroke-dasharray="4 3"/>
+  <rect x="208" y="196" width="140" height="48" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+  <text class="f" x="278" y="226" text-anchor="middle" fill="#5b21b6" font-size="12" font-weight="700">检索指标</text>
+
+  <path d="M466,156 V188" stroke="#ea580c" stroke-width="2" fill="none" marker-end="url(#a)" stroke-dasharray="4 3"/>
+  <rect x="396" y="196" width="140" height="48" rx="10" fill="#fce7f3" stroke="#db2777" stroke-width="2"/>
+  <text class="f" x="466" y="226" text-anchor="middle" fill="#9d174d" font-size="12" font-weight="700">生成指标</text>
+
+  <path d="M348,128 H560 V160" stroke="#44403c" stroke-width="1.5" fill="none"/>
+  <path d="M466,156 H560 V160" stroke="#44403c" stroke-width="1.5" fill="none"/>
+  <line x1="560" y1="160" x2="560" y2="188" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="480" y="196" width="200" height="48" rx="10" fill="#1c1917"/>
+  <text class="f" x="580" y="226" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">端到端正确 / 引用</text>
+
+  <text class="f" x="278" y="280" text-anchor="middle" fill="#64748b" font-size="11">紫 · Top-K 命中</text>
+  <text class="f" x="466" y="280" text-anchor="middle" fill="#64748b" font-size="11">粉 · 幻觉 / 要点</text>
+  <text class="f" x="580" y="280" text-anchor="middle" fill="#64748b" font-size="11">黑 · 用户视角</text>
+</svg>

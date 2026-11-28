@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="220" viewBox="0 0 1000 220" role="img" aria-labelledby="title desc">
+  <title id="title">常用增强总览</title>
+  <desc id="desc">问题经改写、混检、重排、组装后生成并带引用</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 z" fill="#44403c"/>
+    </marker>
+    <style>.f{font-family:ui-sans-serif,system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}</style>
+  </defs>
+  <rect width="1000" height="220" fill="#f7f6f3"/>
+  <text class="f" x="500" y="30" text-anchor="middle" fill="#1c1917" font-size="16" font-weight="700">常用增强 · 上手顺序</text>
+
+  <rect x="24" y="64" width="100" height="88" rx="12" fill="#f5f5f4" stroke="#78716c" stroke-width="2"/>
+  <text class="f" x="74" y="108" text-anchor="middle" fill="#44403c" font-size="13" font-weight="700">问题</text>
+  <text class="f" x="74" y="128" text-anchor="middle" fill="#78716c" font-size="11">灰</text>
+  <line x1="124" y1="108" x2="152" y2="108" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="160" y="64" width="120" height="88" rx="12" fill="#fce7f3" stroke="#db2777" stroke-width="2"/>
+  <text class="f" x="220" y="100" text-anchor="middle" fill="#9d174d" font-size="12" font-weight="700">查询改写</text>
+  <text class="f" x="220" y="120" text-anchor="middle" fill="#be185d" font-size="11">补全 / 解引用</text>
+  <text class="f" x="220" y="138" text-anchor="middle" fill="#64748b" font-size="10">粉 · 增强</text>
+  <line x1="280" y1="108" x2="308" y2="108" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="316" y="64" width="120" height="88" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text class="f" x="376" y="100" text-anchor="middle" fill="#065f46" font-size="12" font-weight="700">混合检索</text>
+  <text class="f" x="376" y="120" text-anchor="middle" fill="#047857" font-size="11">向量 + 关键词</text>
+  <text class="f" x="376" y="138" text-anchor="middle" fill="#64748b" font-size="10">绿 · 召回</text>
+  <line x1="436" y1="108" x2="464" y2="108" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="472" y="64" width="120" height="88" rx="12" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <text class="f" x="532" y="100" text-anchor="middle" fill="#075985" font-size="12" font-weight="700">Rerank</text>
+  <text class="f" x="532" y="120" text-anchor="middle" fill="#0369a1" font-size="11">重排截断</text>
+  <text class="f" x="532" y="138" text-anchor="middle" fill="#64748b" font-size="10">青 · 精排</text>
+  <line x1="592" y1="108" x2="620" y2="108" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="628" y="64" width="120" height="88" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text class="f" x="688" y="100" text-anchor="middle" fill="#1e40af" font-size="12" font-weight="700">组装上下文</text>
+  <text class="f" x="688" y="120" text-anchor="middle" fill="#1d4ed8" font-size="11">+ 角标规则</text>
+  <text class="f" x="688" y="138" text-anchor="middle" fill="#64748b" font-size="10">蓝</text>
+  <line x1="748" y1="108" x2="776" y2="108" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="784" y="64" width="192" height="88" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+  <text class="f" x="880" y="100" text-anchor="middle" fill="#9a3412" font-size="12" font-weight="700">生成 + 引用角标</text>
+  <text class="f" x="880" y="120" text-anchor="middle" fill="#c2410c" font-size="11">可点击溯源</text>
+  <text class="f" x="880" y="138" text-anchor="middle" fill="#64748b" font-size="10">橙 · 产出</text>
+
+  <text class="f" x="500" y="190" text-anchor="middle" fill="#a8a29e" font-size="11">粉改写 → 绿混检 → 青重排 → 蓝组装 → 橙生成</text>
+</svg>

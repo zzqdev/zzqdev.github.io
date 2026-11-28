@@ -136,3 +136,15 @@ site-search > button {
 .hero .sl-link-button.primary:hover {
 	background: #f7ef6a;
 }
+
+/* RAG diagrams: keep readable size in content column */
+.sl-markdown-content img[src^='/ai-eng/rag/'] {
+	display: block;
+	width: auto;
+	max-width: min(100%, 32rem);
+	height: auto;
+	margin-block: 0.75rem 1rem;
+	margin-inline: auto;
+	border-radius: 0.5rem;
+	background: #f7f6f3;
+}

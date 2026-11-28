@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="360" viewBox="0 0 880 360" role="img" aria-labelledby="title desc">
+  <title id="title">Milvus Collection 字段结构</title>
+  <desc id="desc">一行 Chunk = 主键 + 向量 + 原文 + 元数据</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 z" fill="#44403c"/>
+    </marker>
+    <style>
+      .f{font-family:ui-sans-serif,system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+    </style>
+  </defs>
+
+  <rect width="880" height="360" fill="#f7f6f3"/>
+  <text class="f" x="440" y="34" text-anchor="middle" fill="#1c1917" font-size="18" font-weight="700">向量库里存什么</text>
+  <text class="f" x="440" y="56" text-anchor="middle" fill="#78716c" font-size="12">Collection → 一行 = 一个 Chunk</text>
+
+  <!-- Collection -->
+  <rect x="40" y="100" width="160" height="180" rx="14" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+  <rect x="40" y="100" width="8" height="180" rx="2" fill="#7c3aed"/>
+  <text class="f" x="120" y="140" text-anchor="middle" fill="#5b21b6" font-size="14" font-weight="700">Collection</text>
+  <text class="f" x="120" y="164" text-anchor="middle" fill="#7c3aed" font-size="12">一张表</text>
+  <text class="f" x="120" y="220" text-anchor="middle" fill="#64748b" font-size="11">紫 · 库容器</text>
+
+  <line x1="200" y1="190" x2="248" y2="190" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- row -->
+  <rect x="256" y="100" width="180" height="180" rx="14" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <rect x="256" y="100" width="8" height="180" rx="2" fill="#059669"/>
+  <text class="f" x="352" y="140" text-anchor="middle" fill="#065f46" font-size="14" font-weight="700">一行 Entity</text>
+  <text class="f" x="352" y="164" text-anchor="middle" fill="#047857" font-size="12">= 一个 Chunk</text>
+  <text class="f" x="352" y="220" text-anchor="middle" fill="#64748b" font-size="11">绿 · 检索单元</text>
+
+  <line x1="436" y1="190" x2="484" y2="190" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- fields -->
+  <rect x="492" y="80" width="348" height="220" rx="14" fill="#fff" stroke="#d6d3d1" stroke-width="2"/>
+  <text class="f" x="516" y="108" fill="#44403c" font-size="13" font-weight="700">至少四类字段</text>
+
+  <rect x="516" y="124" width="140" height="40" rx="8" fill="#44403c"/>
+  <text class="f" x="586" y="149" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">id 主键</text>
+
+  <rect x="668" y="124" width="148" height="40" rx="8" fill="#7c3aed"/>
+  <text class="f" x="742" y="149" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">embedding 向量</text>
+
+  <rect x="516" y="180" width="140" height="40" rx="8" fill="#2563eb"/>
+  <text class="f" x="586" y="205" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">text 原文</text>
+
+  <rect x="668" y="180" width="148" height="40" rx="8" fill="#ea580c"/>
+  <text class="f" x="742" y="205" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">元数据字段</text>
+
+  <text class="f" x="666" y="250" text-anchor="middle" fill="#78716c" font-size="11">doc_id · title · source · chunk_index · acl…</text>
+  <text class="f" x="666" y="278" text-anchor="middle" fill="#a8a29e" font-size="11">灰主键 · 紫向量 · 蓝原文 · 橙标签</text>
+
+  <text class="f" x="440" y="332" text-anchor="middle" fill="#a8a29e" font-size="11">只存向量不存 text → 捞到了也拼不出上下文</text>
+</svg>

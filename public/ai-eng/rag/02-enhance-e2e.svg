@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="720" viewBox="0 0 720 720" role="img" aria-labelledby="title desc">
+  <title id="title">增强版端到端流程</title>
+  <desc id="desc">权限、改写、混检、重排、可选父段、组装、生成与校验</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9 z" fill="#44403c"/>
+    </marker>
+    <style>.f{font-family:ui-sans-serif,system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}</style>
+  </defs>
+  <rect width="720" height="720" fill="#f7f6f3"/>
+  <text class="f" x="360" y="32" text-anchor="middle" fill="#1c1917" font-size="16" font-weight="700">增强版端到端</text>
+
+  <rect x="240" y="56" width="240" height="40" rx="10" fill="#44403c"/>
+  <text class="f" x="360" y="82" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">用户问题</text>
+  <line x1="360" y1="96" x2="360" y2="120" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="240" y="124" width="240" height="40" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+  <text class="f" x="360" y="150" text-anchor="middle" fill="#9a3412" font-size="13" font-weight="700">权限上下文</text>
+  <line x1="360" y1="164" x2="360" y2="188" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="220" y="192" width="280" height="40" rx="10" fill="#fce7f3" stroke="#db2777" stroke-width="2"/>
+  <text class="f" x="360" y="218" text-anchor="middle" fill="#9d174d" font-size="13" font-weight="700">查询改写 / 多查询</text>
+  <line x1="360" y1="232" x2="360" y2="256" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="220" y="260" width="280" height="40" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text class="f" x="360" y="286" text-anchor="middle" fill="#065f46" font-size="13" font-weight="700">混合检索 · 召回 N</text>
+  <line x1="360" y1="300" x2="360" y2="324" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="220" y="328" width="280" height="40" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <text class="f" x="360" y="354" text-anchor="middle" fill="#075985" font-size="13" font-weight="700">Rerank → Top-K</text>
+  <line x1="360" y1="368" x2="360" y2="392" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <path d="M360,404 L460,440 L360,476 L260,440 Z" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text class="f" x="360" y="436" text-anchor="middle" fill="#92400e" font-size="12" font-weight="700">Parent-Child?</text>
+  <text class="f" x="360" y="454" text-anchor="middle" fill="#b45309" font-size="11">可选</text>
+
+  <path d="M260,440 H140 V500" stroke="#44403c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <text class="f" x="180" y="428" fill="#047857" font-size="11" font-weight="700">是</text>
+  <rect x="60" y="508" width="160" height="40" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text class="f" x="140" y="534" text-anchor="middle" fill="#065f46" font-size="12" font-weight="700">取父段</text>
+
+  <path d="M460,440 H580 V500" stroke="#44403c" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <text class="f" x="520" y="428" fill="#b91c1c" font-size="11" font-weight="700">否</text>
+  <rect x="500" y="508" width="160" height="40" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+  <text class="f" x="580" y="534" text-anchor="middle" fill="#5b21b6" font-size="12" font-weight="700">用 Child 原文</text>
+
+  <path d="M140,548 V580 H360" stroke="#059669" stroke-width="1.5" fill="none"/>
+  <path d="M580,548 V580 H360" stroke="#7c3aed" stroke-width="1.5" fill="none"/>
+  <line x1="360" y1="580" x2="360" y2="600" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="200" y="608" width="320" height="36" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text class="f" x="360" y="632" text-anchor="middle" fill="#1e40af" font-size="12" font-weight="700">组装 Prompt + 角标规则</text>
+  <line x1="360" y1="644" x2="360" y2="660" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="160" y="664" width="180" height="36" rx="10" fill="#ea580c"/>
+  <text class="f" x="250" y="688" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">生成</text>
+  <line x1="340" y1="682" x2="372" y2="682" stroke="#44403c" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="380" y="664" width="200" height="36" rx="10" fill="#1c1917"/>
+  <text class="f" x="480" y="688" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">校验角标 / 记日志</text>
+</svg>
